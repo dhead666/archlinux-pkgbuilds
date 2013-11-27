@@ -1,0 +1,184 @@
+# vim:set ft=sh:
+# Maintainer: BlackIkeEagle < ike DOT devolder AT gmail DOT com >
+# Contributor: DonVla <donvla@users.sourceforge.net>
+# Contributor: Ulf Winkelvos <ulf [at] winkelvos [dot] de>
+# Contributor: Ralf Barth <archlinux dot org at haggy dot org>
+# Contributor: B & monty - Thanks for your hints :)
+#
+# Original credits go to Edgar Hucek <gimli at dark-green dot com>
+# for his xbmc-vdpau-vdr PKGBUILD at https://archvdr.svn.sourceforge.net/svnroot/archvdr/trunk/archvdr/xbmc-vdpau-vdr/PKGBUILD
+
+pkgname=xbmc-alpha
+pkgver=Gotham_alpha9
+pkgrel=1
+pkgdesc="XBMC Media Center git master branch"
+provides=('xbmc')
+conflicts=('xbmc' 'xbmc-pulse' 'xbmc-svn' 'xbmc-git-xvba' 'xbmc-git')
+arch=('i686' 'x86_64')
+url="http://xbmc.org"
+license=('GPL' 'LGPL')
+depends=('hicolor-icon-theme' 'fribidi' 'lzo2' 'smbclient' 'libtiff' 'libva' 'libpng' 'libcdio' 'yajl' 'libmysqlclient' 'libjpeg-turbo' 'libsamplerate' 'glew' 'libssh' 'libmicrohttpd' 'libxrandr' 'sdl_mixer' 'sdl_image' 'python2' 'libass' 'libmpeg2' 'libmad' 'libmodplug' 'jasper' 'rtmpdump' 'unzip' 'mesa-demos' 'xorg-xdpyinfo' 'libbluray' 'libnfs' 'afpfs-ng' 'avahi' 'bluez' 'tinyxml' 'libcap' 'swig' 'taglib' 'java-runtime-headless' 'glu' 'mesa' 'libpulse')
+makedepends=('boost' 'cmake' 'git' 'gperf' 'nasm' 'libxinerama' 'zip' 'libcec' 'udisks' 'upower')
+
+optdepends=(
+	'shairplay-git: optional dep'
+	'libva-vdpau-driver: optional dep'
+	'gdb: for meaningful backtraces in case of trouble - STRONGLY RECOMMENDED'
+	'libcrystalhd: Broadcom CrystalHD kernel module'
+	'libcec: support for Pulse-Eight USB-CEC adapter'
+	'libva-vdpau-driver: accelerated video playback for nvidia cards'
+	'xvba-video: accelerated video playback for amd cards'
+	'lirc: remote controller support'
+	'udisks: automount external drives'
+	'upower: used to trigger suspend functionality'
+	'unrar: access compressed files without unpacking them'
+	'pulseaudio: pulseaudio support'
+)
+install="$pkgname.install"
+source=(
+	"https://github.com/xbmc/xbmc/archive/$pkgver.tar.gz"
+	'xbmc.service'
+)
+sha256sums=(
+	'SKIP'
+	'547e06f3141866cd34b1df34025517e9826992b67543af7621d954bcdfa0ba94'
+)
+
+_prefix='/usr'
+
+
+build() {
+	cd "${srcdir}/xbmc-$pkgver"
+
+	msg "Starting make..."
+
+	# fix configure: error: Submodule lib/libdvd/libdvdcss failed to configure
+	(cd lib/libdvd/libdvdcss; sed -e 's/AM_CONFIG_HEADER/AC_CONFIG_HEADERS/g' -i configure.ac)
+
+	# fix samba4 libsmbclient.h location
+	sed -e 's/\(#include \)<libsmbclient\.h>/\1<samba-4.0\/libsmbclient\.h>/g' \
+		-i xbmc/filesystem/SmbFile.cpp \
+		-i xbmc/filesystem/SMBDirectory.cpp
+
+	# Configure XBMC
+	#
+	# Note on external-libs:
+	#   - We cannot use external python because Arch's python was built with
+	#     UCS2 unicode support, whereas xbmc expects UCS4 support
+	#   - According to an xbmc dev using external/system ffmpeg with xbmc is "pure stupid" :D
+
+	msg2 "Bootstrapping XBMC"
+	./bootstrap
+
+	# latest configure options
+	# --enable-neon           enable neon passing to ffmpeg (default is no)
+	# --enable-optimizations  enable optimization (default is yes)
+	# --enable-gl             enable OpenGL rendering (default is yes)
+	# --enable-gles           enable OpenGLES rendering (default is no)
+	# --enable-sdl            enable SDL (default is auto)
+	# --enable-vdpau          enable VDPAU decoding (default is auto)
+	# --enable-vaapi          enable VAAPI decoding (default is auto)
+	# --enable-crystalhd      enable CrystalHD decoding (default is auto)
+	# --enable-vdadecoder     enable VDADecoder decoding (default is auto)
+	# --enable-vtbdecoder     enable VTBDecoder decoding (default is auto)
+	# --enable-openmax        enable OpenMax decoding (default is auto, requires OpenGLES)
+	# --enable-tegra          enable Tegra2 arm (default is no)
+	# --enable-profiling      enable gprof profiling (default is no)
+	# --enable-joystick       enable SDL joystick support (default is yes)
+	# --enable-xrandr         enable XRandR support (default is yes)
+	# --enable-goom           enable GOOM visualisation (default is no)
+	# --enable-rsxs           enable really slick X screensavers (default is yes)
+	# --enable-projectm       enable ProjectM visualisation (default is yes)
+	# --enable-x11            enable x11 (default is yes) 'Linux Only'
+	# --enable-ccache         enable building with ccache feature (default is auto)
+	# --enable-pulse          enable PulseAudio support (default is auto)
+	# --enable-rtmp           enable RTMP support via librtmp (default is auto)
+	# --disable-samba         disable SAMBA support (default is enabled)
+	# --enable-nfs            enable NFS support via libnfs (default is auto)
+	# --enable-afpclient      enable AFP support via libafpclient (default is auto)
+	# --enable-airplay        enable AirPlay support(default is auto)
+	# --enable-airtunes       enable AirTunes support(default is auto)
+	# --enable-ffmpeg-libvorbis enable FFmpeg vorbis encoding (default is no)
+	# --enable-dvdcss         enable DVDCSS support (default is yes)
+	# --enable-mid            enable MID support (default is no)
+	# --disable-hal           disable HAL support (default is enabled if hal and hal-storage is found)
+	# --disable-avahi         disable Avahi support (default is enabled if libavahi-common and libavahi-client is found)
+	# --disable-non-free      disable componentents with non-compliant licenses
+	# --enable-asap-codec     enable ASAP ADPCM support
+	# --disable-webserver     disable webserver
+	# --disable-optical-drive disable optical drive
+	# --enable-libbluray      enable libbluray support
+	# --enable-texturepacker  enable texturepacker support (default is yes)
+	# --enable-udev           enable udev support (default is auto)
+	# --enable-libusb         enable libusb support (default is auto)
+	# --enable-libcec         enable libcec support (default is auto)
+	# --enable-external-libraries enable use of all supported external libraries (default is no) 'Linux only'
+	# --enable-external-ffmpeg enable use of external ffmpeg libraries (default is no) 'Linux only'
+
+	msg2 "Configuring XBMC"
+	export PYTHON_VERSION=2  # external python v2
+	./configure --prefix=$_prefix --exec-prefix=$_prefix \
+		--disable-ccache \
+		--enable-debug \
+		--enable-optimizations \
+		--enable-gl \
+		--enable-sdl \
+		--enable-vaapi \
+		--enable-vdpau \
+		--disable-xvba \
+		--enable-joystick \
+		--enable-xrandr \
+		--enable-rsxs \
+		--enable-projectm \
+		--enable-x11 \
+		--disable-pulse \
+		--enable-rtmp \
+		--enable-samba \
+		--enable-nfs \
+		--disable-afpclient \
+		--disable-airplay \
+		--disable-airtunes \
+		--disable-ffmpeg-libvorbis \
+		--disable-dvdcss \
+		--disable-hal \
+		--enable-avahi \
+		--enable-webserver \
+		--disable-optical-drive \
+		--disable-libbluray \
+		--enable-texturepacker \
+		--enable-udev \
+		--enable-libusb \
+		--enable-libcec \
+		--enable-external-libraries \
+		--enable-external-ffmpeg
+
+
+	# Now (finally) build
+	msg2 "Running make" 
+	make
+}
+
+package() {
+	cd xbmc-$pkgver
+	msg2 "Running make install" 
+	make DESTDIR="$pkgdir" install
+
+	# run feh with python2
+	sed -i -e 's/python/python2/g' ${pkgdir}${_prefix}/bin/xbmc
+
+	# Tools
+	msg2 "Tools"
+	install -Dm755 $srcdir/xbmc-$pkgver/tools/TexturePacker/TexturePacker \
+		${pkgdir}${_prefix}/lib/xbmc/
+
+	# Licenses
+	msg2 "Copy licenses"
+	install -dm755 ${pkgdir}${_prefix}/share/licenses/${pkgname}
+	for licensef in LICENSE.GPL copying.txt; do
+		mv ${pkgdir}${_prefix}/share/doc/xbmc/${licensef} \
+			${pkgdir}${_prefix}/share/licenses/${pkgname}
+	done
+
+	# install systemd service
+	install -Dm0644 $srcdir/xbmc.service $pkgdir/usr/lib/systemd/system/xbmc.service
+}
