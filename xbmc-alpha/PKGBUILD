@@ -142,12 +142,12 @@ build() {
 		--disable-airplay \
 		--disable-airtunes \
 		--disable-ffmpeg-libvorbis \
-		--disable-dvdcss \
+		--enable-dvdcss \
 		--disable-hal \
 		--enable-avahi \
 		--enable-webserver \
-		--disable-optical-drive \
-		--disable-libbluray \
+		--enable-optical-drive \
+		--enable-libbluray \
 		--enable-texturepacker \
 		--enable-udev \
 		--enable-libusb \
