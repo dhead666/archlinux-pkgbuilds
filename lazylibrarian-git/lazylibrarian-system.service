@@ -1,0 +1,11 @@
+[Unit]
+Description=LazyLibrarian Daemon
+After=network.target
+
+[Service]
+User=lazylibrarian
+Group=lazylibrarian
+ExecStart=/usr/bin/env python2 /opt/lazylibrarian/LazyLibrarian.py --quiet --config /opt/lazylibrarian/config.ini --datadir /opt/lazylibrarian
+
+[Install]
+WantedBy=multi-user.target

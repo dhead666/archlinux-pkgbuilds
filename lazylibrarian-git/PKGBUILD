@@ -1,0 +1,47 @@
+# Maintainer: dhead666 <myfoolishgames@gmail.com>
+# Based on the AUR sickbeard-git package
+
+pkgname=lazylibrarian-git
+pkgver=186.2297d6a
+pkgrel=1
+pkgdesc="A PVR application that downloads and manages your TV shows"
+arch=('any')
+url="https://github.com/DobyTang/LazyLibrarian"
+license=('GPL3')
+depends=('python2' 'python2-feedparser')
+makedepends=('git')
+optdepends=('sabnzbd: NZB downloader'
+            'python2-notify: desktop notifications')
+install=lazylibrarian.install
+#conflicts=('')
+source=("$pkgname::git://github.com/DobyTang/LazyLibrarian.git"
+        'lazylibrarian-system.service' 'lazylibrarian-user.service' 'lazylibrarian.tmpfile')
+sha256sums=('SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP')
+
+pkgver() {
+  cd $pkgname
+
+  echo "$(git rev-list --count HEAD).$(git rev-parse --short HEAD)"
+}
+
+prepare() {
+  cd $pkgname
+
+}
+
+package() {
+  mkdir -p "$pkgdir"/opt/lazylibrarian
+  chmod 775 "$pkgdir"/opt/lazylibrarian
+  cp -r $pkgname/* "$pkgdir"/opt/lazylibrarian
+
+  install -D -m644 lazylibrarian-system.service "$pkgdir"/usr/lib/systemd/system/lazylibrarian.service
+  install -D -m644 lazylibrarian-user.service "$pkgdir"/usr/lib/systemd/user/lazylibrarian.service
+  install -D -m644 lazylibrarian.tmpfile "$pkgdir"/usr/lib/tmpfiles.d/lazylibrarian.conf
+
+  find "$pkgdir" -type d -name '.git' -exec rm -r '{}' +
+}
+
+# vim:set ts=2 sw=2 et:

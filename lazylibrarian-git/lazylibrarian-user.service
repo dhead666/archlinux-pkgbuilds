@@ -1,0 +1,8 @@
+[Unit]
+Description=LazyLibrarian Daemon
+
+[Service]
+ExecStart=/usr/bin/env python2 /opt/lazylibrarian/LazyLibrarian.py --quiet --config %h/.lazylibrarian/config.ini --datadir %h/.lazylibrarian
+
+[Install]
+WantedBy=default.target

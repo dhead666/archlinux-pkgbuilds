@@ -1,0 +1,50 @@
+## arg 1:  the new package version
+post_install() {
+  if grep -q "^lazylibrarian" /etc/group &> /dev/null ; then
+    groupmod -n lazylibrarian lazylibrarian &> /dev/null
+  else
+    groupadd -r lazylibrarian &> /dev/null
+  fi
+  if grep -q "^lazylibrarian:" /etc/passwd 2> /dev/null ; then
+    usermod -s /bin/false -c "LazyLibrarian user" -d /opt/lazylibrarian -g lazylibrarian lazylibrarian &> /dev/null
+  else
+    useradd -s /bin/false -c "LazyLibrarian user" -d /opt/lazylibrarian -g lazylibrarian -r lazylibrarian &> /dev/null
+  fi
+
+  groupadd lazylibrarian &> /dev/null
+  useradd -g lazylibrarian -d /opt/lazylibrarian -s /bin/false lazylibrarian &> /dev/null
+  chgrp -R lazylibrarian /opt/lazylibrarian
+  # sed -i 's/^if isinstance(sys.version_info, tuple):$/if isinstance(sys.version_info[:], tuple):/g' "/usr/lib/python2.7/site-packages/Cheetah/Template.py"
+
+  # Create a directory in /run if it does not exist
+  if [ ! -d /run/lazylibrarian ]; then
+    mkdir /run/lazylibrarian
+    chown lazylibrarian:lazylibrarian /run/lazylibrarian
+    chmod 775 /run/lazylibrarian
+  fi
+
+}
+## arg 1:  the new package version
+## arg 2:  the old package version
+post_upgrade() {
+  chgrp -R lazylibrarian /opt/lazylibrarian
+  sed -i 's/^if isinstance(sys.version_info, tuple):$/if isinstance(sys.version_info[:], tuple):/g' "/usr/lib/python2.7/site-packages/Cheetah/Template.py"
+
+  # Create a directory in /run if it does not exist
+  if [ ! -d /run/lazylibrarian ]; then
+    mkdir /run/lazylibrarian
+    chown lazylibrarian:lazylibrarian /run/lazylibrarian
+    chmod 775 /run/lazylibrarian
+  fi
+
+}
+
+## arg 1:  the old package version
+pre_remove() {
+  userdel lazylibrarian &> /dev/null
+}
+
+post_remove() {
+  echo 'Some files have not been removed because they are created by lazylibrarian itself, e.g. the show database.'
+}
+
