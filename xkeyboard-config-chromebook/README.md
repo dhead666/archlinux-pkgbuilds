@@ -32,5 +32,6 @@ With the extension [Hotkeys](https://chrome.google.com/webstore/detail/mmbiohbmi
     3. Update the xpi with our keyconfig.js.
     4. Start Firefox and map Ctrl+Arrows to the same actions as the Alt+Arrows in ChromeOS (preferable as Alt+Left/Right already used for Back/Forward).
 * Xbindkeys:  
-Sample configuration file is supplied ([xbindkeys_sample](xbindkeys_sample)) as users might like having extra hotkeys.  
-The main difference between the sample config to ChromeOS is the use of Ctrl+Arrows instead of Alt+Arrows.
+Sample configuration file is supplied ([xbindkeys_sample](xbindkeys_sample)) as users might like having extra hotkeys (I don't).  
+The main difference between the sample config to ChromeOS is the use of Ctrl+Arrows instead of Alt+Arrows.  
+Xbindkeys probably won't work in Wayland.  
