@@ -24,9 +24,9 @@ xkeyboard-config with custom mapping for Chromebooks.
 ```
 (gtk_accel_path "<Actions>/DirViewActions/Trash" "<Alt>BackSpace")
 ```
-* Chromium: with the extension [Hotkeys](https://chrome.google.com/webstore/detail/mmbiohbmijkiimgcgijfomelgpmdiigb) map Ctrl+Arrows to the same actions as in ChromeOS.
+* Chromium: with the extension [Hotkeys](https://chrome.google.com/webstore/detail/mmbiohbmijkiimgcgijfomelgpmdiigb) map Ctrl+Arrows to the same actions as the Alt+Arrows in ChromeOS (preferable as Alt+Left/Right already used for Back/Forward).
 * Firefox:
     1. Install the extension [Key Config](https://addons.mozilla.org/en-us/firefox/addon/key-config).
     2. Extract the file keyconfig.js from the xpi package (it's just a zip) and open it, replace the two occurence of the function of scrollByLine to scrollByPages and limit the argument to 1.
     3. Update the xpi with our keyconfig.js.
-    4. Start Firefox and map Ctrl+Arrows to the same actions as in ChromeOS. 
+    4. Start Firefox and map Ctrl+Arrows to the same actions as the Alt+Arrows in ChromeOS (preferable as Alt+Left/Right already used for Back/Forward).
