@@ -26,7 +26,7 @@ xkeyboard-config with custom mapping for Chromebooks.
 ```
 * Chromium: with the extension [Hotkeys](https://chrome.google.com/webstore/detail/mmbiohbmijkiimgcgijfomelgpmdiigb) map Ctrl+Arrows to the same actions as in ChromeOS.
 * Firefox:
-    1. Install Key Config extension.
+    1. Install the extension [Key Config](https://addons.mozilla.org/en-us/firefox/addon/key-config).
     2. Extract the file keyconfig.js from the xpi package (it's just a zip) and open it, replace the two occurence of the function of scrollByLine to scrollByPages and limit the argument to 1.
     3. Update the xpi with our keyconfig.js.
     4. Start Firefox and map Ctrl+Arrows to the same actions as in ChromeOS. 
