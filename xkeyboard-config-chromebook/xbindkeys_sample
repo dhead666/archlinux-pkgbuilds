@@ -1,0 +1,45 @@
+# xbindkeys configuration file
+# needs xvkbd installed
+
+# Ctrl+Arrows act the same as Alt+Arrows in ChromeOS, i.e. sending PageUp, PageDown, Home, End.
+# Ctrl+Backspace as Delete.
+
+# Chromebook's Overview button (F5)
+#     (shows all windows, see https://support.google.com/chromebook/answer/1047364?hl )
+#     * KDE: map to Alt+t (i.e. "\A\t"), switch to next focused window, see also http://community.linuxmint.com/tutorial/view/47
+#     * Gnome: map to to Alt+F1 or Super_L (i.e. "\A\[F1]", "\[Super_L]"), toggle Activites overview 
+#            (doesn't really work in Gnome, disabling Print in Settings->Keyboard->Shortcuts->Screenshots won't help).
+
+#Overview/Switch Window
+#"xvkbd -text "\[Super_L]""  # Gnome
+"xvkbd -xsendevent -text "\A\t""    # KDE
+    m:0x0 + c:71
+    Print 
+
+#Delete
+"xvkbd -xsendevent -text '\[Delete]'"
+    m:0x4 + c:22
+    Control + BackSpace
+
+#End
+"xvkbd -xsendevent -text '\[End]'"
+    m:0x4 + c:114
+    Control + Right
+
+#Home
+"xvkbd -xsendevent -text '\[Home]'"
+    m:0x4 + c:113
+    Control + Left
+
+#Page Down
+"xvkbd -xsendevent -text '\[Page_Down]'"
+    m:0x4 + c:116
+    Control + Down
+
+#Page Up
+"xvkbd -xsendevent -text '\[Page_Up]'"
+    m:0x4 + c:111
+    Control + Up
+
+#
+# End of xbindkeys configuration
