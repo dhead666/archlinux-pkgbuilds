@@ -3,7 +3,7 @@
 xkeyboard-config with custom mapping for Chromebooks.
 
 ###Chromebook tweaks
-* F1-F10 keys mapped to the same keysyms as ChromeOS.
+* F1-F3,F6-F10 keys mapped to the same keysyms as in ChromeOS.
 * F5 mapped to Print keysym (PrintScreen key).
 * English US layout: Alt_R mapped to AltGR.
 * AltGR+Arrows (Up, Down, Left, Right) mapped to the same keysyms as Alt+Arrows in ChromeOS (PgUp, PgDown, Home, End).
@@ -11,10 +11,10 @@ xkeyboard-config with custom mapping for Chromebooks.
 
 ###Benefits
 * F1-F10 keysyms with modifiers are the same (e.g. ALT+F4 still close a window).
-* Suitable when multiple layouts are used, superior to xmodmap as its settings purged when changing layout/language.
+* Suitable when multiple layouts are used (superior to xmodmap as its settings purged when changing layout/language).
 * Works with GTK3 apps like Epiphany and Nautilus (xbindkeys+xvkbd doesn't).
 * Gnome's [drop-down-terminal extension](https://extensions.gnome.org/extension/442/drop-down-terminal): get the backtick/grave character with AltGR+` on the English US layout
-* Might also work in a Wayland desktop (Gnome 3.14) as Wayland supports XKB (though Weston 1.5.0 seems to fallback to the kbd layouts and not xkeyboard-config).
+* Works well in Gnome Wayland session.
 
 ###Known limitations
 * AltGR+Arrows (PgUp, PgDown, Home, End) doesn't works for navigation in Chromium and Firefox but does work when writing in a text box in these applications, it also works in any other application (perfect in Epiphany).
@@ -34,4 +34,3 @@ With the extension [Hotkeys](https://chrome.google.com/webstore/detail/mmbiohbmi
 * Xbindkeys:  
 Sample configuration file is supplied ([xbindkeys_sample](xbindkeys_sample)) as users might like having extra hotkeys (I don't).  
 The main difference between the sample config to ChromeOS is the use of Ctrl+Arrows instead of Alt+Arrows.  
-Xbindkeys probably won't work in Wayland.  
