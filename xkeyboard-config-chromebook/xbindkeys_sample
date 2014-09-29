@@ -1,5 +1,6 @@
 # xbindkeys configuration file
 # needs xvkbd installed
+# inspired by the xbindkeys examples on the ArchWiki Chromebook page
 
 # Ctrl+Arrows act the same as Alt+Arrows in ChromeOS, i.e. sending PageUp, PageDown, Home, End.
 # Ctrl+Backspace as Delete.
