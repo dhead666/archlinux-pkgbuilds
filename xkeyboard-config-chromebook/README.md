@@ -5,7 +5,7 @@ xkeyboard-config with custom mapping for Chromebooks.
 ###Chromebook tweaks
 * F1-F3,F6-F10 keys mapped to the same keysyms as in ChromeOS.
 * F5 mapped to Print keysym (PrintScreen key).
-* English US layout: Alt_R mapped to AltGR.
+* `English(US, Chromebook)` layout was added as a replacement of `English(US)` layout with Alt_R mapped to AltGR.
 * AltGR+Arrows (Up, Down, Left, Right) mapped to the same keysyms as Alt+Arrows in ChromeOS (PgUp, PgDown, Home, End).
 * AltGR+Backspace mapped to Delete.
 
