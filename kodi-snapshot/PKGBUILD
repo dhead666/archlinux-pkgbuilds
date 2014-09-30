@@ -1,5 +1,6 @@
 # vim:set ft=sh:
-# Maintainer: BlackIkeEagle < ike DOT devolder AT gmail DOT com >
+# Maintainer: dhead666
+# Contributor: BlackIkeEagle < ike DOT devolder AT gmail DOT com >
 # Contributor: DonVla <donvla@users.sourceforge.net>
 # Contributor: Ulf Winkelvos <ulf [at] winkelvos [dot] de>
 # Contributor: Ralf Barth <archlinux dot org at haggy dot org>
@@ -7,41 +8,52 @@
 #
 # Original credits go to Edgar Hucek <gimli at dark-green dot com>
 # for his xbmc-vdpau-vdr PKGBUILD at https://archvdr.svn.sourceforge.net/svnroot/archvdr/trunk/archvdr/xbmc-vdpau-vdr/PKGBUILD
+#
+# kodi-snapshot follows xbmc-git which maintains by BlackIkeEagle so I'm (dhead666) not really putting any effort in maintaining it
 
-pkgname=xbmc-devel
-pkgver=Gotham_alpha11
+pkgname=kodi-snapshot
+_pkgname=kodi
+pkgver=14.0a3
+_pkgvername=Helix
+_pkgsrcname=$_pkgname-$pkgver-$_pkgvername
 pkgrel=1
-pkgdesc="XBMC Media Center git master branch"
-provides=('xbmc')
-conflicts=('xbmc' 'xbmc-pulse' 'xbmc-svn' 'xbmc-git-xvba' 'xbmc-git' 'xbmc-alpha')
+pkgdesc="Kodi Media Center git master branch"
+provides=('xbmc' 'kodi')
+conflicts=('xbmc' 'xbmc-pulse' 'xbmc-svn' 'xbmc-git-xvba' 'xbmc-git' 'kodi' 'kodi-git' )
 arch=('i686' 'x86_64')
 url="http://xbmc.org"
 license=('GPL' 'LGPL')
-depends=('hicolor-icon-theme' 'fribidi' 'lzo2' 'smbclient' 'libtiff' 'libva' 'libpng' 'libcdio' 'yajl' 'libmysqlclient' 'libjpeg-turbo' 
-'libsamplerate' 'glew' 'libssh' 'libmicrohttpd' 'libxrandr' 'sdl_mixer' 'sdl_image' 'python2' 'libass' 'libmpeg2' 'libmad' 'libmodplug' 
-'jasper' 'rtmpdump' 'unzip' 'mesa-demos' 'xorg-xdpyinfo' 'libbluray' 'libnfs' 'afpfs-ng' 'avahi' 'bluez-libs' 'tinyxml' 'libcap' 'swig' 
-'taglib' 
-'java-runtime-headless' 'glu' 'mesa' 'libpulse' 'ffmpeg' 'libxslt')
-makedepends=('boost' 'cmake' 'git' 'gperf' 'nasm' 'libxinerama' 'zip' 'libcec' 'udisks' 'upower')
-
+depends=(
+'bluez-libs' 'curl' 'flac' 'glew' 'hicolor-icon-theme' 'lame' 'libaacs'
+'libass' 'libbluray' 'libcdio' 'libmariadbclient' 'libmicrohttpd' 'libmodplug'
+'libmpeg2' 'libpulse' 'libsamplerate' 'libssh' 'libva' 'libvdpau' 'libvorbis'
+'libxrandr' 'libxslt' 'lzo' 'mesa' 'python2-pillow' 'python2-simplejson'
+'rtmpdump' 'sdl_image' 'smbclient' 'taglib' 'tinyxml' 'xorg-xdpyinfo' 'yajl'
+)
+makedepends=(
+'afpfs-ng' 'boost' 'cmake' 'doxygen' 'git' 'gperf' 'jasper'
+'java-runtime' 'libcec' 'libnfs' 'libplist' 'nasm' 'shairplay'
+'swig' 'unzip' 'upower' 'zip'
+)
 optdepends=(
-	'shairplay-git: optional dep'
-	'libva-vdpau-driver: optional dep'
-	'gdb: for meaningful backtraces in case of trouble - STRONGLY RECOMMENDED'
-	'libcrystalhd: Broadcom CrystalHD kernel module'
-	'libcec: support for Pulse-Eight USB-CEC adapter'
-	'libva-vdpau-driver: accelerated video playback for nvidia cards'
-	'xvba-video: accelerated video playback for amd cards'
-	'lirc: remote controller support'
-	'udisks: automount external drives'
-	'upower: used to trigger suspend functionality'
-	'unrar: access compressed files without unpacking them'
-	'pulseaudio: pulseaudio support'
+'gdb: for meaningful backtraces in case of trouble - STRONGLY RECOMMENDED'
+'afpfs-ng: Apple shares support'
+'bluez: Blutooth support'
+'libnfs: NFS shares support'
+'libplist: AirPlay support'
+'libcec: Pulse-Eight USB-CEC adapter support'
+'lirc: Remote controller support'
+'pulseaudio: PulseAudio support'
+'shairplay: AirPlay support'
+'udisks: Automount external drives'
+'unrar: Archives support'
+'unzip: Archives support'
+'upower: Display battery level'
 )
 install="$pkgname.install"
 source=(
-	"https://github.com/xbmc/xbmc/archive/$pkgver.tar.gz"
-	'xbmc.service'
+	"https://github.com/xbmc/xbmc/archive/$pkgver-$_pkgvername.tar.gz"
+	"$_pkgname.service"
 )
 sha256sums=(
 	'SKIP'
@@ -50,28 +62,32 @@ sha256sums=(
 
 _prefix='/usr'
 
+prepare() {
+	msg "Starting make..."
+
+	mv "${srcdir}/xbmc-$pkgver-$_pkgvername" "${srcdir}/$_pkgsrcname"
+
+	cd "${srcdir}/$_pkgsrcname"
+
+	find -type f -name *.py -exec sed 's|^#!.*python$|#!/usr/bin/python2|' -i "{}" +
+	sed 's|^#!.*python$|#!/usr/bin/python2|' -i tools/depends/native/rpl-native/rpl
+	sed 's/python/python2/' -i tools/Linux/xbmc.sh.in
+}
 
 build() {
-	cd "${srcdir}/xbmc-$pkgver"
+	cd "${srcdir}/$_pkgsrcname"
 
 	msg "Starting make..."
 
-	# fix configure: error: Submodule lib/libdvd/libdvdcss failed to configure
-	(cd lib/libdvd/libdvdcss; sed -e 's/AM_CONFIG_HEADER/AC_CONFIG_HEADERS/g' -i configure.ac)
 
-	# fix samba4 libsmbclient.h location
-	sed -e 's/\(#include \)<libsmbclient\.h>/\1<samba-4.0\/libsmbclient\.h>/g' \
-		-i xbmc/filesystem/SmbFile.cpp \
-		-i xbmc/filesystem/SMBDirectory.cpp
-
-	# Configure XBMC
+	# Configure Kodi
 	#
 	# Note on external-libs:
 	#   - We cannot use external python because Arch's python was built with
-	#     UCS2 unicode support, whereas xbmc expects UCS4 support
-	#   - According to an xbmc dev using external/system ffmpeg with xbmc is "pure stupid" :D
+	#     UCS2 unicode support, whereas kodi expects UCS4 support
+	#   - According to an kodi dev using external/system ffmpeg with kodi is "pure stupid" :D
 
-	msg2 "Bootstrapping XBMC"
+	msg2 "Bootstrapping Kodi"
 	./bootstrap
 
 	# latest configure options
@@ -119,30 +135,27 @@ build() {
 	# --enable-external-libraries enable use of all supported external libraries (default is no) 'Linux only'
 	# --enable-external-ffmpeg enable use of external ffmpeg libraries (default is no) 'Linux only'
 
-	msg2 "Configuring XBMC"
+	msg2 "Configuring Kodi"
 	export PYTHON_VERSION=2  # external python v2
 	./configure --prefix=$_prefix --exec-prefix=$_prefix \
-		--disable-ccache \
 		--enable-debug \
-		--enable-optimizations \
+		--disable-optimizations \
 		--enable-gl \
-		--enable-sdl \
 		--enable-vaapi \
 		--enable-vdpau \
-		--disable-xvba \
 		--enable-joystick \
 		--enable-xrandr \
 		--enable-rsxs \
 		--enable-projectm \
 		--enable-x11 \
-		--disable-pulse \
+		--enable-pulse \
 		--enable-rtmp \
 		--enable-samba \
 		--enable-nfs \
-		--disable-afpclient \
-		--disable-airplay \
-		--disable-airtunes \
-		--disable-ffmpeg-libvorbis \
+		--enable-afpclient \
+		--enable-airplay \
+		--enable-airtunes \
+		--enable-ffmpeg-libvorbis \
 		--enable-dvdcss \
 		--disable-hal \
 		--enable-avahi \
@@ -154,25 +167,20 @@ build() {
 		--enable-libusb \
 		--enable-libcec \
 		--enable-external-libraries \
-		--enable-external-ffmpeg
-
+		--with-lirc-device=/run/lirc/lircd
 
 	# Now (finally) build
-	msg2 "Running make" 
 	make
 }
 
 package() {
-	cd xbmc-$pkgver
+	cd $_pkgsrcname
 	msg2 "Running make install" 
 	make DESTDIR="$pkgdir" install
 
-	# run feh with python2
-	sed -i -e 's/python/python2/g' ${pkgdir}${_prefix}/bin/xbmc
-
 	# Tools
 	msg2 "Tools"
-	install -Dm755 $srcdir/xbmc-$pkgver/tools/TexturePacker/TexturePacker \
+	install -Dm755 $srcdir/$_pkgsrcname/tools/TexturePacker/TexturePacker \
 		${pkgdir}${_prefix}/lib/xbmc/
 
 	# Licenses
@@ -184,5 +192,5 @@ package() {
 	done
 
 	# install systemd service
-	install -Dm0644 $srcdir/xbmc.service $pkgdir/usr/lib/systemd/system/xbmc.service
+	install -Dm0644 $srcdir/$_pkgname.service $pkgdir/usr/lib/systemd/system/$_pkgname.service
 }
