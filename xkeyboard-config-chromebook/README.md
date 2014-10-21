@@ -19,6 +19,7 @@ xkeyboard-config with custom mapping for Chromebooks.
 ###Known limitations
 * AltGR+Arrows (PgUp, PgDown, Home, End) doesn't works for navigation in Chromium and Firefox but does work when writing in a text box in these applications, it also works in any other application (perfect in Epiphany).
 * Our AltGR+Right hotkey (set as `End`) conflicts with Gnome's Super+End hotkey (set as `Switch to last workspace`), when pressing Super+Right instead of attaching the focused application to the right of the screen (`Toggle tiled right`) it switch to the last workspace. for now please disable the hotkey via `Settings->Keyboard->Shortcuts->Navigation` (press Backspace to disable a hotkey).  
+* Firefox doesn't respect XF86Reload (F3 key set as Reload). If Firefox is your default browser then you can comment out the patch that set F3 as XF86Reload and use another method to set it as 'Ctrl+R', see example in [xbindkeys_sample](xbindkeys_sample).  
 
 ###Other recommended hotkeys tweaks 
 *  Nautilus: set Alt+Backspace as send-to-trash action by adding this line to `~/.config/nautilus/accels`.
