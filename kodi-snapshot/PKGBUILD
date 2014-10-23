@@ -9,7 +9,7 @@
 # Original credits go to Edgar Hucek <gimli at dark-green dot com>
 # for his xbmc-vdpau-vdr PKGBUILD at https://archvdr.svn.sourceforge.net/svnroot/archvdr/trunk/archvdr/xbmc-vdpau-vdr/PKGBUILD
 #
-# kodi-snapshot follows xbmc-git which maintains by BlackIkeEagle so I'm (dhead666) not really putting any effort in maintaining it
+# kodi-snapshot follows xbmc-git which maintained by BlackIkeEagle so I (dhead666) don't not really putting any effort in maintaining it
 
 pkgname=kodi-snapshot
 _pkgname=kodi
