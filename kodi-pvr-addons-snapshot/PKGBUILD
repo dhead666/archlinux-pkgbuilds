@@ -1,0 +1,33 @@
+# Maintainer: dhead666
+# Contributor: Olaf Bauer <hydro@freenet.de>
+# Contributor: dejavu <pauli8585@hotmail.com>
+# kodi-pvr-addons-snapshot follows xbmc-pvr-addons-git which maintained by Olaf Bauer so I (dhead666) don't really putting any effort in maintaining it
+
+pkgname=kodi-pvr-addons-snapshot
+_oldname=xbmc-pvr-addons
+pkgver=067befe6b8da81e29abca8cd394d08c84233677b
+pkgrel=1
+pkgdesc="Kodi PVR add-ons"
+arch=('i686' 'x86_64')
+url="https://github.com/opdenkamp/xbmc-pvr-addons"
+license=('GPL3')
+depends=('libmysqlclient' 'jsoncpp' 'crypto++' 'curl')
+makedepends=('boost')
+optdepends=('tvheadend-git: tvheadend backend' 'mythtv: mythtv backend')
+provides=('xbmc-pvr-addons')
+conflicts=('xbmc-pvr-addons')
+source=("https://github.com/opdenkamp/$_oldname/archive/$_oldname-$pkgver.tar.gz")
+md5sums=('SKIP')
+
+build() {
+  mv "$srcdir/$_oldname-$pkgver" "$srcdir/$pkgname-$pkgver"
+  cd "$srcdir/$pkgname-$pkgver"
+  ./bootstrap
+  ./configure --prefix=/usr --enable-addons-with-dependencies
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+  make DESTDIR="$pkgdir/" install
+}
