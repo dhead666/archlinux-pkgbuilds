@@ -24,16 +24,16 @@ arch=('i686' 'x86_64')
 url="http://xbmc.org"
 license=('GPL' 'LGPL')
 depends=(
-'bluez-libs' 'curl' 'flac' 'glew' 'hicolor-icon-theme' 'lame' 'libaacs'
+'bluez-libs' 'curl' 'glew' 'hicolor-icon-theme' 'lame' 'libaacs'
 'libass' 'libbluray' 'libcdio' 'libmariadbclient' 'libmicrohttpd' 'libmodplug'
 'libmpeg2' 'libpulse' 'libsamplerate' 'libssh' 'libva' 'libvdpau' 'libvorbis'
 'libxrandr' 'libxslt' 'lzo' 'mesa' 'python2-pillow' 'python2-simplejson'
-'rtmpdump' 'sdl_image' 'smbclient' 'taglib' 'tinyxml' 'xorg-xdpyinfo' 'yajl'
+'rtmpdump' 'sdl_image' 'smbclient' 'taglib' 'tinyxml' 'xorg-xdpyinfo' 'yajl' 'sdl2'
 )
 makedepends=(
 'afpfs-ng' 'boost' 'cmake' 'doxygen' 'git' 'gperf' 'jasper'
 'java-runtime' 'libcec' 'libnfs' 'libplist' 'nasm' 'shairplay'
-'swig' 'unzip' 'upower' 'zip' 'sdl2'
+'swig' 'unzip' 'upower' 'zip'
 )
 optdepends=(
 'gdb: for meaningful backtraces in case of trouble - STRONGLY RECOMMENDED'
