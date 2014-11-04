@@ -13,7 +13,7 @@
 
 pkgname=kodi-snapshot
 _pkgname=kodi
-pkgver=14.0a4
+pkgver=14.0b1
 _pkgvername=Helix
 _pkgsrcname=$_pkgname-$pkgver-$_pkgvername
 pkgrel=1
@@ -33,7 +33,7 @@ depends=(
 makedepends=(
 'afpfs-ng' 'boost' 'cmake' 'doxygen' 'git' 'gperf' 'jasper'
 'java-runtime' 'libcec' 'libnfs' 'libplist' 'nasm' 'shairplay'
-'swig' 'unzip' 'upower' 'zip'
+'swig' 'unzip' 'upower' 'zip' 'sdl2'
 )
 optdepends=(
 'gdb: for meaningful backtraces in case of trouble - STRONGLY RECOMMENDED'
@@ -71,7 +71,7 @@ prepare() {
 
 	find -type f -name *.py -exec sed 's|^#!.*python$|#!/usr/bin/python2|' -i "{}" +
 	sed 's|^#!.*python$|#!/usr/bin/python2|' -i tools/depends/native/rpl-native/rpl
-	sed 's/python/python2/' -i tools/Linux/xbmc.sh.in
+	sed 's/python/python2/' -i tools/Linux/kodi.sh.in
 }
 
 build() {
@@ -165,7 +165,7 @@ build() {
 		--enable-texturepacker \
 		--enable-udev \
 		--enable-libusb \
-		--enable-libcec \
+		--disable-libcec \
 		--enable-external-libraries \
 		--with-lirc-device=/run/lirc/lircd
 
@@ -181,13 +181,13 @@ package() {
 	# Tools
 	msg2 "Tools"
 	install -Dm755 $srcdir/$_pkgsrcname/tools/TexturePacker/TexturePacker \
-		${pkgdir}${_prefix}/lib/xbmc/
+		${pkgdir}${_prefix}/lib/kodi/
 
 	# Licenses
 	msg2 "Copy licenses"
 	install -dm755 ${pkgdir}${_prefix}/share/licenses/${pkgname}
 	for licensef in LICENSE.GPL copying.txt; do
-		mv ${pkgdir}${_prefix}/share/doc/xbmc/${licensef} \
+		mv ${pkgdir}${_prefix}/share/doc/kodi/${licensef} \
 			${pkgdir}${_prefix}/share/licenses/${pkgname}
 	done
 
