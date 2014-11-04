@@ -16,7 +16,7 @@ makedepends=('boost')
 optdepends=('tvheadend-git: tvheadend backend' 'mythtv: mythtv backend')
 provides=('xbmc-pvr-addons')
 conflicts=('xbmc-pvr-addons')
-source=("https://github.com/opdenkamp/$_oldname/archive/$_oldname-$pkgver.tar.gz")
+source=("https://github.com/opdenkamp/$_oldname/archive/$pkgver.tar.gz")
 md5sums=('SKIP')
 
 build() {
