@@ -13,7 +13,7 @@
 
 pkgname=kodi-snapshot
 _pkgname=kodi
-pkgver=14.0b1
+pkgver=14.0b2
 _pkgvername=Helix
 _pkgsrcname=$_pkgname-$pkgver-$_pkgvername
 pkgrel=1
@@ -165,7 +165,7 @@ build() {
 		--enable-texturepacker \
 		--enable-udev \
 		--enable-libusb \
-		--disable-libcec \
+		--enable-libcec \
 		--enable-external-libraries \
 		--with-lirc-device=/run/lirc/lircd
 
