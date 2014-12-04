@@ -22,9 +22,10 @@ xkeyboard-config with custom mapping for Chromebooks.
 * Firefox doesn't respect XF86Reload (F3 key set as Reload). If Firefox is your default browser then you can comment out the patch that set F3 as XF86Reload and use another method to set it as 'Ctrl+R', see example in [xbindkeys_sample](xbindkeys_sample).  
 
 ###Other recommended hotkeys tweaks 
-*  Nautilus: set Alt+Backspace as send-to-trash action by adding this line to `~/.config/nautilus/accels`.
+*  Nautilus: set Alt+Backspace as send-to-trash action and Shift+Backspace as delete by adding theses lines to `~/.config/nautilus/accels`.
 ```
 (gtk_accel_path "<Actions>/DirViewActions/Trash" "<Alt>BackSpace")
+(gtk_accel_path "<Actions>/DirViewActions/Delete" "<Shift>Backspace")
 ```
 * Chromium:  
 With the extension [Hotkeys](https://chrome.google.com/webstore/detail/mmbiohbmijkiimgcgijfomelgpmdiigb) map Ctrl+Arrows to the same actions as the Alt+Arrows in ChromeOS (preferable as Alt+Left/Right already used for Back/Forward).
