@@ -3,5 +3,5 @@ post_upgrade() {
   echo 'instead English(US, Chromebook) layout was added.'
   echo ''
   echo 'Alt+Shift+Arrows set as PgUp, PgDown, Home and End,'
-  echo 'If no one will speak up then the Alt+Arrows mapping will be removed soon.'
+  echo 'If no one will speak up then the AltGR+Arrows mapping will be removed soon.'
 }
