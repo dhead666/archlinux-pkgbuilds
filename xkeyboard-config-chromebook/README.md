@@ -19,12 +19,16 @@ xkeyboard-config with custom mapping for Chromebooks.
 * Works well in Gnome Wayland session.
 
 ###Known limitations
-* Chromium and Firefox aren't respecting AltGR. AltGR+Arrows (PgUp, PgDown, Home, End) not working properly for navigation in Chromium and Firefox but do work when writing in a text box with these applications, it also works in any other application (perfect in Epiphany).
+* Chromium and Firefox aren't respecting AltGR and not Alt+Shift mapping. AltGR+Arrows and Alt+Shift+Arrows (PgUp, PgDown, Home, End) not working properly for navigation in Chromium and Firefox but do work when writing in a text box with these applications, it also works in any other application (perfect in Epiphany).
+* Alt+Shift+Down hotkey (set as `PgUp`) conflicts with Nautilus hotkey mapping to the action `OpenCloseParent`. It's recommended to clear the hotkey mapping by adding the following line to `~/.config/nautilus/accels`.
+```
+(gtk_accel_path "<Actions>/DirViewActions/OpenCloseParent" "")
+```
 * Our AltGR+Right hotkey (set as `End`) conflicts with Gnome's Super+End hotkey (set as `Switch to last workspace`), when pressing Super+Right instead of attaching the focused application to the right of the screen (`Toggle tiled right`) it switch to the last workspace. for now please disable the hotkey via `Settings->Keyboard->Shortcuts->Navigation` (press Backspace to disable a hotkey).  
 * Firefox doesn't respect XF86Reload (F3 key set as Reload). If Firefox is your default browser then you can comment out the patch that set F3 as XF86Reload and use another method to set it as 'Ctrl+R', see example in [xbindkeys_sample](xbindkeys_sample).  
 
 ###Other recommended hotkeys tweaks 
-*  Nautilus: set Alt+Backspace as send-to-trash action and Shift+Backspace as delete by adding theses lines to `~/.config/nautilus/accels`.
+*  Nautilus: set Alt+Backspace as send-to-trash action and Shift+Backspace as delete by adding the following lines to `~/.config/nautilus/accels`.
 ```
 (gtk_accel_path "<Actions>/DirViewActions/Trash" "<Alt>BackSpace")
 (gtk_accel_path "<Actions>/DirViewActions/Delete" "<Shift>BackSpace")
