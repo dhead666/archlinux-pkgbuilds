@@ -25,7 +25,7 @@ xkeyboard-config with custom mapping for Chromebooks.
 *  Nautilus: set Alt+Backspace as send-to-trash action and Shift+Backspace as delete by adding theses lines to `~/.config/nautilus/accels`.
 ```
 (gtk_accel_path "<Actions>/DirViewActions/Trash" "<Alt>BackSpace")
-(gtk_accel_path "<Actions>/DirViewActions/Delete" "<Shift>Backspace")
+(gtk_accel_path "<Actions>/DirViewActions/Delete" "<Shift>BackSpace")
 ```
 * Chromium:  
 With the extension [Hotkeys](https://chrome.google.com/webstore/detail/mmbiohbmijkiimgcgijfomelgpmdiigb) map Ctrl+Arrows to the same actions as the Alt+Arrows in ChromeOS (preferable as Alt+Left/Right already used for Back/Forward).
