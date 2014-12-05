@@ -11,7 +11,7 @@ xkeyboard-config with custom mapping for Chromebooks.
 
 ###Benefits
 * F1-F10 keysyms with modifiers are the same (e.g. ALT+F4 still close a window).
-* Get the keysyms of F1-F10 with AltGR (e.g. AltGR+F1 for rename in Nautilus).
+* Get the keysyms of F1-F10 with AltGR (e.g. AltGR+F2 for rename in Nautilus).
 * Suitable when multiple layouts are used (superior to xmodmap as its settings purged when changing layout/language).
 * Works with GTK3 apps like Epiphany and Nautilus (xbindkeys+xvkbd doesn't).
 * Gnome's [drop-down-terminal extension](https://extensions.gnome.org/extension/442/drop-down-terminal): get the backtick/grave character with AltGR+` on the English (US, Chromebook) layout.
