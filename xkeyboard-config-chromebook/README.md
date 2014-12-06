@@ -1,3 +1,22 @@
+#Staging branch remarks
+
+This branch includes a solution so the mapping of alt+shift+arrows will work also in Chromium, Firefox and LibreOffice.
+
+Notice that this solution is a little bit buggy, when holding the alt+shift+arrows hotkeys for a long period of time the system will stop responding to the hotkey and it will take a few seconds for any key press to register.
+
+Auto repeating is also broken so you will need to set it manually by adding the following to your `.xinitrc` (or other autostart method) to get back repeats of arrows keys
+```
+xset r 111
+xset r 113
+xset r 114
+xset r 116
+```
+
+This solution is only for an Xorg session, it won't work in a Wayland session because [libxkcommon](https://github.com/xkbcommon/libxkbcommon) doesn't support it, I opened a [feature request for adding the RedirectKey action](https://github.com/xkbcommon/libxkbcommon/issues/18), please show your support by posting there.
+
+
+ATM I decided to keep this solution in a separated branch as I've got no idea if these issues will ever be fixed in xorg-server and because that RedirectKey doesn't work in a Wayland session.
+
 #xkeyboard-config-chromebook
 
 xkeyboard-config with custom mapping for Chromebooks.
