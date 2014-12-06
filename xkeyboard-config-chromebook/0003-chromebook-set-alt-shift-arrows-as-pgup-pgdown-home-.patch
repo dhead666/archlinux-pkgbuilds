@@ -1,18 +1,18 @@
-From dcdb4f5f02a868a113b8b715f68aca79fb0c4bcf Mon Sep 17 00:00:00 2001
+From 094707bcc2731554c1d5a27537daf41a1068713e Mon Sep 17 00:00:00 2001
 From: dhead666 <myfoolishgames@gmail.com>
-Date: Fri, 5 Dec 2014 17:07:07 +0200
+Date: Fri, 5 Dec 2014 22:53:46 +0200
 Subject: [PATCH 3/6] [chromebook] set alt+shift+arrows as pgup,pgdown,home,end
 
 ---
- symbols/pc  | 20 ++++++++++++++++----
- types/basic |  9 +++++++++
- 2 files changed, 25 insertions(+), 4 deletions(-)
+ symbols/pc  | 49 +++++++++++++++++++++++++++++++++++++++++++++----
+ types/basic | 11 +++++++++++
+ 2 files changed, 56 insertions(+), 4 deletions(-)
 
 diff --git a/symbols/pc b/symbols/pc
-index 9a2ad57..7f7d3eb 100644
+index 9a2ad57..6ca6636 100644
 --- a/symbols/pc
 +++ b/symbols/pc
-@@ -80,8 +80,20 @@ xkb_symbols "editing" {
+@@ -80,8 +80,49 @@ xkb_symbols "editing" {
      key  <END> {	[  End			]	};
      key <PGDN> {	[  Next			]	};
  
@@ -22,23 +22,52 @@ index 9a2ad57..7f7d3eb 100644
 -    key <RGHT> {	[  Right		]	};
 +    key <UP> {
 +	type= "CHROMEBOOK",
-+	[  Up, Up, Prior, Up ]
++	repeat=yes,
++	[  Up, Up, Prior, Up ],
++	actions[Group1] = [
++	    NoAction(),
++	    NoAction(),
++	    RedirectKey(key=<PGUP>, clearmods=Alt+Shift),
++	    NoAction()
++	]
 +    };
 +    key <LEFT> {
 +	type= "CHROMEBOOK",
-+	[  Left, Left, Home, Left ]
++	repeat=yes,
++	[  Left, Left, Home, Left ],
++	actions[Group1] = [
++	    NoAction(),
++	    NoAction(),
++	    RedirectKey(key=<HOME>, clearmods=Alt+Shift),
++	    NoAction()
++
++	]
 +    };
 +    key <DOWN> {
 +	type= "CHROMEBOOK",
-+	[  Down, Down, Next, Down ]
++	repeat=yes,
++	[  Down, Down, Next, Down ],
++	actions[Group1] = [
++	    NoAction(),
++	    NoAction(),
++	    RedirectKey(key=<PGDN>, clearmods=Alt+Shift),
++	    NoAction()
++	]
 +    };
 +    key <RGHT> {
 +	type= "CHROMEBOOK",
-+	[  Right, Right, End, Right ]
++	repeat=yes,
++	[  Right, Right, End, Right ],
++	actions[Group1] = [
++	    NoAction(),
++	    NoAction(),
++	    RedirectKey(key=<END>, clearmods=Alt+Shift),
++	    NoAction()
++	]
 +    };
  };
 diff --git a/types/basic b/types/basic
-index fff06be..0a27ef9 100644
+index fff06be..19dc0cc 100644
 --- a/types/basic
 +++ b/types/basic
 @@ -5,6 +5,7 @@ default xkb_types "basic" {
@@ -49,17 +78,19 @@ index fff06be..0a27ef9 100644
  
      type "ONE_LEVEL" {
  	modifiers = None;
-@@ -26,5 +27,13 @@ default xkb_types "basic" {
+@@ -26,5 +27,15 @@ default xkb_types "basic" {
  	level_name[Level1] = "Base";
  	level_name[Level2] = "Caps";
      };
 +    type "CHROMEBOOK" {
-+	modifiers = Shift+Alt;
++	modifiers = Shift+Alt+Control;
 +	map[Shift] = Level2;
 +	map[Alt+Shift] = Level3;
++	map[Control+Alt+Shift] = Level4;
 +	level_name[Level1] = "Base";
 +	level_name[Level2] = "Caps";
-+        level_name[Level3] = "ShiftAlt";
++        level_name[Level3] = "AltShift";
++	level_name[Level4] = "ControlAltShift";
 +    };
  
  };
