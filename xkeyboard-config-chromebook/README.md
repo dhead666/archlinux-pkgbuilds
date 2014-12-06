@@ -20,7 +20,7 @@ xkeyboard-config with custom mapping for Chromebooks.
 
 ###Known limitations
 * Chromium and Firefox aren't respecting AltGR and not Alt+Shift mapping. AltGR+Arrows and Alt+Shift+Arrows (PgUp, PgDown, Home, End) not working properly for navigation in Chromium and Firefox but do work when writing in a text box with these applications, it also works in any other application (perfect in Epiphany).
-* Alt+Shift+Down hotkey (set as `PgUp`) conflicts with Nautilus hotkey mapping to the action `OpenCloseParent`. It's recommended to clear the hotkey mapping by adding the following line to `~/.config/nautilus/accels`.
+* Alt+Shift+Down hotkey (set as `PgDown`) conflicts with Nautilus hotkey mapping to the action `OpenCloseParent`. It's recommended to clear the hotkey mapping by adding the following line to `~/.config/nautilus/accels`.
 ```
 (gtk_accel_path "<Actions>/DirViewActions/OpenCloseParent" "")
 ```
