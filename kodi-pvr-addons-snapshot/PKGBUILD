@@ -5,14 +5,13 @@
 
 pkgname=kodi-pvr-addons-snapshot
 _oldname=xbmc-pvr-addons
-pkgver=067befe6b8da81e29abca8cd394d08c84233677b
+pkgver=5eea14767c50a80ee307a6dbae3e2cbc94a256c8
 pkgrel=1
 pkgdesc="Kodi PVR add-ons"
 arch=('i686' 'x86_64')
 url="https://github.com/opdenkamp/xbmc-pvr-addons"
 license=('GPL3')
-depends=('libmysqlclient' 'jsoncpp' 'crypto++' 'curl')
-makedepends=('boost')
+makedepends=('jsoncpp' 'crypto++' 'curl' 'zlib')
 optdepends=('tvheadend-git: tvheadend backend' 'mythtv: mythtv backend')
 provides=('xbmc-pvr-addons')
 conflicts=('xbmc-pvr-addons')
