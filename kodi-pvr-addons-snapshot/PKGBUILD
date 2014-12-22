@@ -5,7 +5,7 @@
 
 pkgname=kodi-pvr-addons-snapshot
 _oldname=xbmc-pvr-addons
-pkgver=5eea14767c50a80ee307a6dbae3e2cbc94a256c8
+pkgver=89ba5bb6917a820b278688b9f43b23834002e9b5
 pkgrel=1
 pkgdesc="Kodi PVR add-ons"
 arch=('i686' 'x86_64')
