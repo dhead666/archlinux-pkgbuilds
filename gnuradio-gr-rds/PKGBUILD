@@ -1,0 +1,35 @@
+# Maintainer: dhead666 <myfoolishgames@gmail.com>
+# This PKGBUILD was fastly hacked to package the software so it's a bit partial
+
+pkgname=gnuradio-gr-rds-git
+_gitname='gr-rds'
+pkgver=ff1ca15
+pkgrel=1
+pkgdesc="GNU Radio FM RDS Receiver"
+arch=('i686' 'x86_64')
+url="https://github.com/bastibl/gr-rds"
+license=('GPL')
+#makedepends=('mingw-w64-cmake')
+depends=('gnuradio')
+#options=()
+source=("$_gitname::git://github.com/bastibl/gr-rds.git")
+md5sums=('SKIP')
+
+pkgver() {
+  cd $_gitname
+  git describe --always | sed 's|-|.|g'
+}
+
+build() { 
+  unset LDFLAGS
+  cd "$srcdir/$_gitname"
+    mkdir -p build && pushd build
+    cmake -DCMAKE_BUILD_TYPE=Release  ..
+    make
+    popd
+}
+
+package() {
+    cd "$srcdir/$_gitname/build"
+    make DESTDIR="${pkgdir}" install
+}
