@@ -1,29 +1,27 @@
 # Maintainer: dhead666 <myfoolishgames@gmail.com>
-# This PKGBUILD was fastly hacked to package the software so it's a bit partial
 
 pkgname=go-for-it
 pkgver=1.2
 pkgrel=1
-pkgdesc="Go For IT"
+pkgdesc='A stylish to-do list with built-in productivity timer'
 arch=('any')
-url="https://github.com/mank319/Go-For-It"
+url="http://manuel-kehl.de/projects/go-for-it"
 license=('GPL3')
-#makedepends=('mingw-w64-cmake')
-#depends=('mingw-w64-crt')
-#options=()
+makedepends=('cmake' 'vala')
+depends=('gtk3')
+install=go-for-it.install
 source=("https://github.com/mank319/Go-For-It/archive/release_v$pkgver.tar.gz")
 md5sums=('SKIP')
 
 build() { 
-  unset LDFLAGS
   cd "$srcdir/Go-For-It-release_v$pkgver/"
-    mkdir -p build && pushd build
-    cmake -DCMAKE_BUILD_TYPE=Release  ..
-    make
-    popd
+  mkdir -p build && pushd build
+  cmake -DCMAKE_BUILD_TYPE=Release  ..
+  make
+  popd
 }
 
 package() {
-    cd "${srcdir}/Go-For-It-release_v$pkgver/build"
-    make DESTDIR="${pkgdir}" install
+  cd "${srcdir}/Go-For-It-release_v$pkgver/build"
+  make DESTDIR="${pkgdir}" install
 }
