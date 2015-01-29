@@ -5,8 +5,8 @@
 
 pkgname=xkeyboard-config-chromebook
 _pkgname=xkeyboard-config
-pkgver=2.13
-pkgrel=7
+pkgver=2.14
+pkgrel=1
 pkgdesc="X keyboard configuration files"
 arch=(any)
 license=('custom')
@@ -24,7 +24,7 @@ source=(http://xorg.freedesktop.org/archive/individual/data/${_pkgname}/${_pkgna
         0005-chromebook-set-f3-key-as-reload.patch
         0006-chromebook-set-f5-key-chrome-os-overview-as-printscr.patch)
 
-sha256sums=('7b5be9f2b9a30102512b15308aec55f7f54289df24ac21de82ebb4bf145f9fce'
+sha256sums=('dc91458a214c56a35727f9e523fc647615de64137057ca6ee4d4d4474a4bb2ae'
             'SKIP'
             'SKIP'
             'SKIP'
