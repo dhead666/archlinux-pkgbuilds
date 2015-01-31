@@ -1,5 +1,5 @@
 # Maintainer: dhead666 <myfoolishgames@gmail.com>
-# Based on the AUR sickbeard-git package
+# Based on the AUR mediaelch package
 
 pkgname=mediaelch-git
 _gitname=MediaElch
