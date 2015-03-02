@@ -1,0 +1,27 @@
+# Maintainer: dhead666 <myfoolishgames@gmail.com>
+
+pkgname=kodi-platform-snapshot
+_pkgname=kodi-platform
+pkgver=68315f04d8a7c3bc4833af7bd56f5b7d905d351d
+pkgrel=1
+pkgdesc='Kodi platform environment for compiling cmake binary addons'
+arch=('any')
+url="https://github.com/xbmc/kodi-platform"
+license=('GPL')
+makedepends=('cmake')
+depends=('kodi-snapshot' 'tinyxml')
+source=("https://github.com/xbmc/$_pkgname/archive/$pkgver.tar.gz")
+md5sums=('SKIP')
+
+build() { 
+  cd "$srcdir/$_pkgname-$pkgver"
+  mkdir -p build && pushd build
+  cmake -DCMAKE_BUILD_TYPE=Release  ..
+  make
+  popd
+}
+
+package() {
+  cd "$srcdir/$_pkgname-$pkgver/build"
+  make DESTDIR="${pkgdir}" install
+}
