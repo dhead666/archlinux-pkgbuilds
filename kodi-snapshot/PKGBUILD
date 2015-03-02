@@ -13,8 +13,8 @@
 
 pkgname=kodi-snapshot
 _pkgname=kodi
-pkgver=14.0
-_pkgvername=Helix
+pkgver=15.0a1
+_pkgvername=Isengard
 _pkgsrcname=$_pkgname-$pkgver-$_pkgvername
 pkgrel=1
 pkgdesc="Kodi Media Center git master branch"
@@ -28,7 +28,7 @@ depends=(
 'libass' 'libbluray' 'libcdio' 'libmariadbclient' 'libmicrohttpd' 'libmodplug'
 'libmpeg2' 'libpulse' 'libsamplerate' 'libssh' 'libva' 'libvdpau' 'libvorbis'
 'libxrandr' 'libxslt' 'lzo' 'mesa' 'python2-pillow' 'python2-simplejson'
-'rtmpdump' 'sdl_image' 'smbclient' 'taglib' 'tinyxml' 'xorg-xdpyinfo' 'yajl' 'sdl2'
+'rtmpdump' 'smbclient' 'taglib' 'tinyxml' 'xorg-xdpyinfo' 'yajl' 'sdl2'
 )
 makedepends=(
 'afpfs-ng' 'boost' 'cmake' 'doxygen' 'git' 'gperf' 'jasper'
@@ -70,6 +70,7 @@ prepare() {
 	find -type f -name *.py -exec sed 's|^#!.*python$|#!/usr/bin/python2|' -i "{}" +
 	sed 's|^#!.*python$|#!/usr/bin/python2|' -i tools/depends/native/rpl-native/rpl
 	sed 's/python/python2/' -i tools/Linux/kodi.sh.in
+        sed '/--enable-static/d' -i tools/depends/native/TexturePacker/Makefile
 }
 
 build() {
