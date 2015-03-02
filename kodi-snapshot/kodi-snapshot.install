@@ -20,5 +20,5 @@ update_icons() {
 }
 
 update_autostart() {
-  echo "To autostart xbmc standalone read: https://wiki.archlinux.org/index.php/Xbmc#Autostarting_at_boot"
+  echo "To autostart Kodi standalone read: https://wiki.archlinux.org/index.php/Kodi#Autostarting_at_boot_or_ondemand"
 }
