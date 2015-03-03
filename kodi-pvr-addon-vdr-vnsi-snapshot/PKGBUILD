@@ -1,0 +1,33 @@
+# Maintainer: dhead666 <myfoolishgames@gmail.com>
+
+pkgname=kodi-pvr-addon-vdr-vnsi-snapshot
+_gitname=pvr.vdr.vnsi
+pkgver=3cc618e5948eff5c41591a1d5935ef0f60665deb
+pkgrel=1
+pkgdesc='VDR VNSI client addon for Kodi'
+arch=('any')
+url="https://github.com/kodi-pvr/$_gitname"
+license=('GPL')
+makedepends=('cmake' 'kodi-platform-snapshot')
+depends=('kodi-snapshot')
+source=("https://github.com/kodi-pvr/$_gitname/archive/$pkgver.tar.gz")
+md5sums=('SKIP')
+
+prepare() {
+  msg "Starting make..."
+  cd "${srcdir}/$_gitname-$pkgver"
+  sed 's/libXBMC_codec.h/kodi\/libXBMC_codec.h/' -i src/xbmc_codec_descriptor.hpp
+}
+
+build() { 
+  cd "${srcdir}/$_gitname-$pkgver"
+  mkdir -p build && pushd build
+  cmake -DCMAKE_BUILD_TYPE=Release  ..
+  make
+  popd
+}
+
+package() {
+  cd "${srcdir}/$_gitname-$pkgver/build"
+  make DESTDIR="${pkgdir}" install
+}

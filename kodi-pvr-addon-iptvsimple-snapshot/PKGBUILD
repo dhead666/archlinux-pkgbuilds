@@ -1,0 +1,32 @@
+# Maintainer: dhead666 <myfoolishgames@gmail.com>
+
+pkgname=kodi-pvr-addon-iptvsimple-snapshot
+_gitname=pvr.iptvsimple
+pkgver=f6ca89489d0fa671dc0da533f70f2236774119ed
+pkgrel=1
+pkgdesc='VDR VNSI client addon for Kodi'
+arch=('any')
+url="https://github.com/kodi-pvr/$_gitname"
+license=('GPL')
+makedepends=('cmake' 'kodi-platform-snapshot')
+depends=('kodi-snapshot')
+source=("https://github.com/kodi-pvr/$_gitname/archive/$pkgver.tar.gz")
+md5sums=('SKIP')
+
+prepare() {
+  msg "Starting make..."
+  cd "${srcdir}/$_gitname-$pkgver"
+}
+
+build() { 
+  cd "${srcdir}/$_gitname-$pkgver"
+  mkdir -p build && pushd build
+  cmake -DCMAKE_BUILD_TYPE=Release  ..
+  make
+  popd
+}
+
+package() {
+  cd "${srcdir}/$_gitname-$pkgver/build"
+  make DESTDIR="${pkgdir}" install
+}

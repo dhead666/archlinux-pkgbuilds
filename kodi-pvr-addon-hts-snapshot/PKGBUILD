@@ -1,0 +1,33 @@
+# Maintainer: dhead666 <myfoolishgames@gmail.com>
+
+pkgname=kodi-pvr-addon-hts-snapshot
+_gitname=pvr.hts
+pkgver=3bc77ae4c4d261ce0210a6afff7404f7ac4ff106
+pkgrel=1
+pkgdesc='Tvheadend HTSP client addon for Kodi'
+arch=('any')
+url="https://github.com/kodi-pvr/$_gitname"
+license=('GPL')
+makedepends=('cmake' 'kodi-platform-snapshot')
+depends=('kodi-snapshot')
+source=("https://github.com/kodi-pvr/$_gitnmame/archive/$pkgver.tar.gz")
+md5sums=('SKIP')
+
+prepare() {
+  msg "Starting make..."
+  cd "${srcdir}/$_gitname-$pkgver"
+  sed 's/libXBMC_codec.h/kodi\/libXBMC_codec.h/' -i src/xbmc_codec_descriptor.hpp
+}
+
+build() { 
+  cd "${srcdir}/$_gitname-$pkgver"
+  mkdir -p build && pushd build
+  cmake -DCMAKE_BUILD_TYPE=Release  ..
+  make
+  popd
+}
+
+package() {
+  cd "${srcdir}/$_gitname-$pkgver/build"
+  make DESTDIR="${pkgdir}" install
+}
