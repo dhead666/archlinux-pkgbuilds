@@ -13,6 +13,8 @@ depends=('kodi-snapshot')
 source=("https://github.com/kodi-pvr/$_gitname/archive/$pkgver.tar.gz")
 md5sums=('SKIP')
 
+_prefix='/usr'
+
 prepare() {
   msg "Starting make..."
   cd "${srcdir}/$_gitname-$pkgver"
@@ -21,7 +23,7 @@ prepare() {
 build() { 
   cd "${srcdir}/$_gitname-$pkgver"
   mkdir -p build && pushd build
-  cmake -DCMAKE_BUILD_TYPE=Release  ..
+  cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$_prefix ..
   make
   popd
 }
