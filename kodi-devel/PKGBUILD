@@ -22,101 +22,97 @@ arch=('i686' 'x86_64')
 url="http://xbmc.org"
 license=('GPL' 'LGPL')
 depends=(
-'bluez-libs' 'curl' 'glew' 'hicolor-icon-theme' 'lame' 'libaacs'
-'libass' 'libbluray' 'libcdio' 'libmariadbclient' 'libmicrohttpd' 'libmodplug'
-'libmpeg2' 'libpulse' 'libsamplerate' 'libssh' 'libva' 'libvdpau' 'libvorbis'
-'libxrandr' 'libxslt' 'lzo' 'mesa' 'python2-pillow' 'python2-simplejson'
-'rtmpdump' 'smbclient' 'taglib' 'tinyxml' 'xorg-xdpyinfo' 'yajl' 'sdl2'
+  'bluez-libs' 'curl' 'glew' 'hicolor-icon-theme' 'lame' 'libaacs'
+  'libass' 'libbluray' 'libcdio' 'libmariadbclient' 'libmicrohttpd' 'libmodplug'
+  'libmpeg2' 'libpulse' 'libsamplerate' 'libssh' 'libva' 'libvdpau' 'libvorbis'
+  'libxrandr' 'libxslt' 'lzo' 'mesa' 'python2-pillow' 'python2-simplejson'
+  'rtmpdump' 'smbclient' 'taglib' 'tinyxml' 'xorg-xdpyinfo' 'yajl' 'sdl2'
 )
 makedepends=(
-'afpfs-ng' 'boost' 'cmake' 'doxygen' 'git' 'gperf' 'jasper'
-'java-runtime' 'libcec' 'libnfs' 'libplist' 'nasm' 'shairplay'
-'swig' 'unzip' 'upower' 'zip'
+  'afpfs-ng' 'boost' 'cmake' 'doxygen' 'git' 'gperf' 'jasper'
+  'java-runtime' 'libcec' 'libnfs' 'libplist' 'nasm' 'shairplay'
+  'swig' 'unzip' 'upower' 'zip'
 )
 optdepends=(
-'gdb: for meaningful backtraces in case of trouble - STRONGLY RECOMMENDED'
-'afpfs-ng: Apple shares support'
-'bluez: Blutooth support'
-'libnfs: NFS shares support'
-'libplist: AirPlay support'
-'libcec: Pulse-Eight USB-CEC adapter support'
-'lirc: Remote controller support'
-'pulseaudio: PulseAudio support'
-'shairplay: AirPlay support'
-'udisks: Automount external drives'
-'unrar: Archives support'
-'unzip: Archives support'
-'upower: Display battery level'
+  'gdb: for meaningful backtraces in case of trouble - STRONGLY RECOMMENDED'
+  'afpfs-ng: Apple shares support'
+  'bluez: Blutooth support'
+  'libnfs: NFS shares support'
+  'libplist: AirPlay support'
+  'libcec: Pulse-Eight USB-CEC adapter support'
+  'lirc: Remote controller support'
+  'pulseaudio: PulseAudio support'
+  'shairplay: AirPlay support'
+  'udisks: Automount external drives'
+  'unrar: Archives support'
+  'unzip: Archives support'
+  'upower: Display battery level'
 )
 install="$pkgname.install"
-source=(
-	"https://github.com/xbmc/xbmc/archive/$pkgver-$_pkgvername.tar.gz"
-)
-sha256sums=(
-	'SKIP'
-)
+source=("https://github.com/xbmc/xbmc/archive/$pkgver-$_pkgvername.tar.gz")
+sha256sums=('SKIP')
 
 _prefix='/usr'
 
 prepare() {
-	msg "Starting make..."
+  msg "Starting make..."
 
-	mv "${srcdir}/xbmc-$pkgver-$_pkgvername" "${srcdir}/$_pkgsrcname"
+  mv "${srcdir}/xbmc-$pkgver-$_pkgvername" "${srcdir}/$_pkgsrcname"
+  cd "${srcdir}/$_pkgsrcname"
 
-	cd "${srcdir}/$_pkgsrcname"
-
-	find -type f -name *.py -exec sed 's|^#!.*python$|#!/usr/bin/python2|' -i "{}" +
-	sed 's|^#!.*python$|#!/usr/bin/python2|' -i tools/depends/native/rpl-native/rpl
-	sed 's/python/python2/' -i tools/Linux/kodi.sh.in
-        sed '/--enable-static/d' -i tools/depends/native/TexturePacker/Makefile
+  find -type f -name *.py -exec sed 's|^#!.*python$|#!/usr/bin/python2|' -i "{}" +
+  sed 's|^#!.*python$|#!/usr/bin/python2|' -i tools/depends/native/rpl-native/rpl
+  sed 's/python/python2/' -i tools/Linux/kodi.sh.in
+  # texturepacker cannot build statically
+  sed '/--enable-static/d' -i tools/depends/native/TexturePacker/Makefile
 }
 
 build() {
-	cd "${srcdir}/$_pkgsrcname"
+  cd "${srcdir}/$_pkgsrcname"
 
-	msg "Starting make..."
+  msg "Starting make..."
 
 
-	# Configure Kodi
-	#
-	# Note on external-libs:
-	#   - We cannot use external python because Arch's python was built with
-	#     UCS2 unicode support, whereas kodi expects UCS4 support
-	#   - According to an kodi dev using external/system ffmpeg with kodi is "pure stupid" :D
+  # Configure Kodi
+  #
+  # Note on external-libs:
+  #   - We cannot use external python because Arch's python was built with
+  #     UCS2 unicode support, whereas kodi expects UCS4 support
+  #   - According to an kodi dev using external/system ffmpeg with kodi is "pure stupid" :D
 
-	msg2 "Bootstrapping Kodi"
-	./bootstrap
+  msg2 "Bootstrapping Kodi"
+  ./bootstrap
 
-	#./configure --help
-	#return 1
+  #./configure --help
+  #return 1
 
-	msg2 "Configuring Kodi"
-	export PYTHON_VERSION=2  # external python v2
-	./configure --prefix=$_prefix --exec-prefix=$_prefix \
-		--disable-optimizations \
-		--enable-avahi \
-		--enable-libbluray \
-		--with-lirc-device=/run/lirc/lircd
+  msg2 "Configuring Kodi"
+  export PYTHON_VERSION=2  # external python v2
+  ./configure --prefix=$_prefix --exec-prefix=$_prefix \
+    --disable-optimizations \
+    --enable-avahi \
+    --enable-libbluray \
+    --with-lirc-device=/run/lirc/lircd
 
-	# Now (finally) build
-	make
+  # Now (finally) build
+  make
 }
 
 package() {
-	cd $_pkgsrcname
-	msg2 "Running make install" 
-	make DESTDIR="$pkgdir" install
+  cd $_pkgsrcname
+  msg2 "Running make install" 
+  make DESTDIR="$pkgdir" install
 
-	# Tools
-	msg2 "Tools"
-	install -Dm755 $srcdir/$_pkgsrcname/tools/TexturePacker/TexturePacker \
-		${pkgdir}${_prefix}/lib/kodi/
+  # Tools
+  msg2 "Tools"
+  install -Dm755 $srcdir/$_pkgsrcname/tools/TexturePacker/TexturePacker \
+    ${pkgdir}${_prefix}/lib/kodi/
 
-	# Licenses
-	msg2 "Copy licenses"
-	install -dm755 ${pkgdir}${_prefix}/share/licenses/${pkgname}
-	for licensef in LICENSE.GPL copying.txt; do
-		mv ${pkgdir}${_prefix}/share/doc/kodi/${licensef} \
-			${pkgdir}${_prefix}/share/licenses/${pkgname}
-	done
+  # Licenses
+  msg2 "Copy licenses"
+  install -dm755 ${pkgdir}${_prefix}/share/licenses/${pkgname}
+  for licensef in LICENSE.GPL copying.txt; do
+    mv ${pkgdir}${_prefix}/share/doc/kodi/${licensef} \
+      ${pkgdir}${_prefix}/share/licenses/${pkgname}
+  done
 }
