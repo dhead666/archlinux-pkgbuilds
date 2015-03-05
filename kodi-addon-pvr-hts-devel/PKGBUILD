@@ -1,6 +1,6 @@
 # Maintainer: dhead666 <myfoolishgames@gmail.com>
 
-pkgname=kodi-pvr-addon-hts-snapshot
+pkgname=kodi-addon-pvr-hts-devel
 _gitname=pvr.hts
 pkgver=3bc77ae4c4d261ce0210a6afff7404f7ac4ff106
 pkgrel=1
@@ -8,8 +8,8 @@ pkgdesc='Tvheadend HTSP client addon for Kodi'
 arch=('i686' 'x86_64')
 url="https://github.com/kodi-pvr/$_gitname"
 license=('GPL')
-makedepends=('cmake' 'kodi-platform-snapshot')
-depends=('kodi-snapshot')
+makedepends=('cmake' 'kodi-platform-devel')
+depends=('kodi-devel')
 source=("https://github.com/kodi-pvr/$_gitname/archive/$pkgver.tar.gz")
 md5sums=('SKIP')
 

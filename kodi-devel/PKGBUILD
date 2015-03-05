@@ -1,4 +1,3 @@
-# vim:set ft=sh:
 # Maintainer: dhead666
 # Contributor: BlackIkeEagle < ike DOT devolder AT gmail DOT com >
 # Contributor: DonVla <donvla@users.sourceforge.net>
@@ -9,17 +8,16 @@
 # Original credits go to Edgar Hucek <gimli at dark-green dot com>
 # for his xbmc-vdpau-vdr PKGBUILD at https://archvdr.svn.sourceforge.net/svnroot/archvdr/trunk/archvdr/xbmc-vdpau-vdr/PKGBUILD
 #
-# kodi-snapshot follows xbmc-git which maintained by BlackIkeEagle so I (dhead666) don't not really putting any effort in maintaining it
 
-pkgname=kodi-snapshot
+pkgname=kodi-devel
 _pkgname=kodi
 pkgver=15.0a1
 _pkgvername=Isengard
 _pkgsrcname=$_pkgname-$pkgver-$_pkgvername
 pkgrel=1
-pkgdesc="Kodi Media Center git master branch"
+pkgdesc="Kodi Media Center monthly development releases"
 provides=('xbmc' 'kodi')
-conflicts=('xbmc' 'xbmc-pulse' 'xbmc-svn' 'xbmc-git-xvba' 'xbmc-git' 'kodi' 'kodi-git' )
+conflicts=('xbmc' 'xbmc-pulse' 'xbmc-svn' 'xbmc-git-xvba' 'xbmc-git' 'kodi' 'kodi-git')
 arch=('i686' 'x86_64')
 url="http://xbmc.org"
 license=('GPL' 'LGPL')

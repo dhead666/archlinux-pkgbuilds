@@ -1,6 +1,6 @@
 # Maintainer: dhead666 <myfoolishgames@gmail.com>
 
-pkgname=kodi-platform-snapshot
+pkgname=kodi-platform-devel
 _gitname=kodi-platform
 pkgver=20150221.68315f0
 _gitver=68315f04d8a7c3bc4833af7bd56f5b7d905d351d
@@ -10,7 +10,7 @@ arch=('any')
 url="https://github.com/xbmc/$_gitname"
 license=('GPL')
 makedepends=('cmake')
-depends=('kodi-snapshot' 'tinyxml')
+depends=('kodi-devel' 'tinyxml')
 conflicts=('kodi-platform')
 source=("https://github.com/xbmc/$_gitname/archive/$_gitver.tar.gz")
 md5sums=('SKIP')
