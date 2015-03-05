@@ -24,7 +24,7 @@ prepare() {
   sed 's/libXBMC_codec.h/kodi\/libXBMC_codec.h/' -i src/xbmc_codec_descriptor.hpp
 }
 
-build() { 
+build() {
   cd "$srcdir/$_gitname-$_gitver"
   mkdir -p build && pushd build
   cmake \

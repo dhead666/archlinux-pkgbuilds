@@ -19,7 +19,7 @@ md5sums=('SKIP')
 
 _prefix='/usr'
 
-build() { 
+build() {
   cd "$srcdir/$_gitname-$_gitver"
   mkdir -p build && pushd build
   cmake \

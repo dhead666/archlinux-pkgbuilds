@@ -23,7 +23,7 @@ prepare() {
   cd "$srcdir/$_gitname-$_gitver"
 }
 
-build() { 
+build() {
   cd "$srcdir/$_gitname-$_gitver"
   mkdir -p build && pushd build
   cmake \
