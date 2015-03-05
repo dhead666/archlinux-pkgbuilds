@@ -28,7 +28,7 @@ build() {
   cd "$srcdir/$_gitname-$_gitver"
   mkdir -p build && pushd build
   cmake \
-    -DCMAKE_INSTALL_PREFIX=$_prefix \    
+    -DCMAKE_INSTALL_PREFIX=$_prefix \
     -DCMAKE_BUILD_TYPE=Release \
     ..
   make
