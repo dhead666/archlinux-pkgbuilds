@@ -1,27 +1,36 @@
 # Maintainer: dhead666 <myfoolishgames@gmail.com>
 
 pkgname=kodi-platform-snapshot
-_pkgname=kodi-platform
-pkgver=68315f04d8a7c3bc4833af7bd56f5b7d905d351d
+_gitname=kodi-platform
+pkgver=20150221.68315f0
+_gitver=68315f04d8a7c3bc4833af7bd56f5b7d905d351d
 pkgrel=1
 pkgdesc='Kodi platform environment for compiling cmake binary addons'
 arch=('any')
-url="https://github.com/xbmc/kodi-platform"
+url="https://github.com/xbmc/$_gitname"
 license=('GPL')
 makedepends=('cmake')
 depends=('kodi-snapshot' 'tinyxml')
-source=("https://github.com/xbmc/$_pkgname/archive/$pkgver.tar.gz")
+conflicts=('kodi-platform')
+source=("https://github.com/xbmc/$_gitname/archive/$_gitver.tar.gz")
 md5sums=('SKIP')
 
+_prefix='/usr'
+
 build() { 
-  cd "$srcdir/$_pkgname-$pkgver"
+  cd "$srcdir/$_gitname-$_gitver"
   mkdir -p build && pushd build
-  cmake -DCMAKE_BUILD_TYPE=Release  ..
+  cmake \
+    -DCMAKE_INSTALL_PREFIX=$_prefix \
+    -DCMAKE_INSTALL_LIBDIR="$_prefix\lib \
+    -DCMAKE_INSTALL_LIBDIR_NOARCH="$_prefix/lib" \
+    -DCMAKE_BUILD_TYPE=Release \
+    ..
   make
   popd
 }
 
 package() {
-  cd "$srcdir/$_pkgname-$pkgver/build"
-  make DESTDIR="${pkgdir}" install
+  cd "$srcdir/$_gitname-$_gitver/build"
+  make DESTDIR="$pkgdir" install
 }
