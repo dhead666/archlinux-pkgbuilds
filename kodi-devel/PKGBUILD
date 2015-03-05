@@ -9,50 +9,23 @@
 # for his xbmc-vdpau-vdr PKGBUILD at https://archvdr.svn.sourceforge.net/svnroot/archvdr/trunk/archvdr/xbmc-vdpau-vdr/PKGBUILD
 #
 
-pkgname=kodi-devel
+pkgbase=kodi-devel
+pkgname=('kodi-devel' 'kodi-eventclients-devel')
 _pkgname=kodi
 pkgver=15.0a1
 _pkgvername=Isengard
 _pkgsrcname=$_pkgname-$pkgver-$_pkgvername
 pkgrel=1
-pkgdesc="Kodi Media Center monthly development releases"
-provides=('xbmc' 'kodi')
-conflicts=('xbmc' 'xbmc-pulse' 'xbmc-svn' 'xbmc-git-xvba' 'xbmc-git' 'kodi' 'kodi-git')
 arch=('i686' 'x86_64')
 url="http://xbmc.org"
 license=('GPL' 'LGPL')
-depends=(
-  'bluez-libs' 'curl' 'glew' 'hicolor-icon-theme' 'lame' 'libaacs'
-  'libass' 'libbluray' 'libcdio' 'libmariadbclient' 'libmicrohttpd' 'libmodplug'
-  'libmpeg2' 'libpulse' 'libsamplerate' 'libssh' 'libva' 'libvdpau' 'libvorbis'
-  'libxrandr' 'libxslt' 'lzo' 'mesa' 'python2-pillow' 'python2-simplejson'
-  'rtmpdump' 'smbclient' 'taglib' 'tinyxml' 'xorg-xdpyinfo' 'yajl' 'sdl2'
-)
+
 makedepends=(
-  'afpfs-ng' 'boost' 'cmake' 'doxygen' 'git' 'gperf' 'jasper'
+  'afpfs-ng' 'boost' 'cmake' 'cwiid' 'doxygen' 'git' 'gperf' 'jasper'
   'java-runtime' 'libcec' 'libnfs' 'libplist' 'nasm' 'shairplay'
   'swig' 'unzip' 'upower' 'zip'
 )
-optdepends=(
-  'gdb: for meaningful backtraces in case of trouble - STRONGLY RECOMMENDED'
-  'afpfs-ng: Apple shares support'
-  'bluez: Blutooth support'
-  'kodi-addon-pvr-hts-devel: Tvheadend HTSP client addon for Kodi'
-  'kodi-addon-pvr-iptvsimple-devel: IPTV Simple client addon for Kodi'
-  'kodi-addon-pvr-vdr-vnsi: VDR VNSI client addon for Kodi'
-  'libcec: Pulse-Eight USB-CEC adapter support'
-  'libnfs: NFS shares support'
-  'libplist: AirPlay support'
-  'lirc: Remote controller support'
-  'lsb-release: log distro information in crashlog'
-  'pulseaudio: PulseAudio support'
-  'shairplay: AirPlay support'
-  'udisks: Automount external drives'
-  'unrar: Archives support'
-  'unzip: Archives support'
-  'upower: Display battery level'
-)
-install="$pkgname.install"
+
 source=("https://github.com/xbmc/xbmc/archive/$pkgver-$_pkgvername.tar.gz")
 sha256sums=('SKIP')
 
@@ -102,7 +75,40 @@ build() {
   make
 }
 
-package() {
+package_kodi-devel() {
+  pkgdesc="Kodi Media Center monthly development releases"
+  provides=('xbmc' 'kodi')
+  conflicts=('xbmc' 'xbmc-pulse' 'xbmc-svn' 'xbmc-git-xvba' 'xbmc-git' 'kodi' 'kodi-git')
+
+  depends=(
+    'bluez-libs' 'curl' 'glew' 'hicolor-icon-theme' 'lame' 'libaacs'
+    'libass' 'libbluray' 'libcdio' 'libmariadbclient' 'libmicrohttpd' 'libmodplug'
+    'libmpeg2' 'libpulse' 'libsamplerate' 'libssh' 'libva' 'libvdpau' 'libvorbis'
+    'libxrandr' 'libxslt' 'lzo' 'mesa' 'python2-pillow' 'python2-simplejson'
+    'rtmpdump' 'smbclient' 'taglib' 'tinyxml' 'xorg-xdpyinfo' 'yajl' 'sdl2'
+  )
+
+  optdepends=(
+    'gdb: for meaningful backtraces in case of trouble - STRONGLY RECOMMENDED'
+    'afpfs-ng: Apple shares support'
+    'bluez: Blutooth support'
+    'kodi-addon-pvr-hts-devel: Tvheadend HTSP client addon for Kodi'
+    'kodi-addon-pvr-iptvsimple-devel: IPTV Simple client addon for Kodi'
+    'kodi-addon-pvr-vdr-vnsi: VDR VNSI client addon for Kodi'
+    'libcec: Pulse-Eight USB-CEC adapter support'
+    'libnfs: NFS shares support'
+    'libplist: AirPlay support'
+    'lirc: Remote controller support'
+    'lsb-release: log distro information in crashlog'
+    'pulseaudio: PulseAudio support'
+    'shairplay: AirPlay support'
+    'udisks: Automount external drives'
+    'unrar: Archives support'
+    'unzip: Archives support'
+    'upower: Display battery level'
+  )
+  install="$pkgname.install"
+
   cd $_pkgsrcname
   msg2 "Running make install" 
   make DESTDIR="$pkgdir" install
@@ -119,4 +125,17 @@ package() {
     mv ${pkgdir}${_prefix}/share/doc/kodi/${licensef} \
       ${pkgdir}${_prefix}/share/licenses/${pkgname}
   done
+}
+
+package_kodi-eventclients-devel() {
+  pkgdesc="Kodi Event Clients"
+  depends=('cwiid')
+
+  cd "$srcdir/$_pkgsrcname"
+
+  make DESTDIR="$pkgdir" eventclients WII_EXTRA_OPTS=-DCWIID_OLD
+
+  install -dm755 "$pkgdir/usr/lib/python2.7/$pkgbase"
+  mv "$pkgdir/kodi"/* "$pkgdir/usr/lib/python2.7/$pkgbase"
+  rmdir "$pkgdir/kodi"
 }
