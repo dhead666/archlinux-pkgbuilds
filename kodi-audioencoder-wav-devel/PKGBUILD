@@ -1,5 +1,6 @@
 # Maintainer: dhead666 <myfoolishgames@gmail.com>
-
+# https://github.com/dhead666/archlinux-pkgbuilds
+#
 # package version generated with # git log -1 --date=short --format="%cd.%h" | tr -d '-'
 
 pkgname=kodi-audioencoder-wav-devel
