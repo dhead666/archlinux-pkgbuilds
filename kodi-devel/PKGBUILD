@@ -21,9 +21,13 @@ url="http://xbmc.org"
 license=('GPL' 'LGPL')
 
 makedepends=(
-  'afpfs-ng' 'boost' 'cmake' 'cwiid' 'doxygen' 'git' 'gperf' 'jasper'
-  'java-runtime' 'libcec' 'libnfs' 'libplist' 'nasm' 'shairplay'
-  'swig' 'unzip' 'upower' 'zip'
+  'afpfs-ng' 'bluez-libs' 'boost' 'cmake' 'curl' 'cwiid' 'doxygen' 'git' 'glew'
+  'gperf' 'hicolor-icon-theme' 'jasper' 'java-runtime' 'lame'  'libaacs' 'libass'
+  'libbluray' 'libcdio' 'libcec' 'libgl' 'libmariadbclient' 'libmicrohttpd'
+  'libmodplug' 'libmpeg2' 'libnfs' 'libplist' 'libpulse' 'libsamplerate' 'libssh'
+  'libva' 'libvdpau' 'libvorbis' 'libxrandr' 'libxslt' 'lzo' 'mesa' 'nasm' 'python2-pillow'
+  'python2-simplejson' 'rtmpdump' 'sdl2' 'shairplay' 'smbclient' 'swig' 'taglib'
+  'tinyxml' 'unzip' 'upower' 'xorg-xdpyinfo' 'yajl' 'zip'
 )
 
 source=("https://github.com/xbmc/xbmc/archive/$pkgver-$_pkgvername.tar.gz")
@@ -85,7 +89,7 @@ package_kodi-devel() {
     'libass' 'libbluray' 'libcdio' 'libmariadbclient' 'libmicrohttpd' 'libmodplug'
     'libmpeg2' 'libpulse' 'libsamplerate' 'libssh' 'libva' 'libvdpau' 'libvorbis'
     'libxrandr' 'libxslt' 'lzo' 'mesa' 'python2-pillow' 'python2-simplejson'
-    'rtmpdump' 'smbclient' 'taglib' 'tinyxml' 'xorg-xdpyinfo' 'yajl' 'sdl2'
+    'rtmpdump' 'sdl2' 'smbclient' 'taglib' 'tinyxml' 'xorg-xdpyinfo' 'yajl'
   )
 
   optdepends=(
@@ -95,6 +99,10 @@ package_kodi-devel() {
     'kodi-addon-pvr-hts-devel: Tvheadend HTSP client addon for Kodi'
     'kodi-addon-pvr-iptvsimple-devel: IPTV Simple client addon for Kodi'
     'kodi-addon-pvr-vdr-vnsi: VDR VNSI client addon for Kodi'
+    'kodi-audioencoder-flac-devel: 'Flac encoder addon for Kodi'
+    'kodi-audioencoder-lame-devel: 'Lame MP3 encoder addon for Kodi'
+    'kodi-audioencoder-vorbis-devel: 'Vorbis encoder addon for Kodi'
+    'kodi-audioencoder-wav-devel: 'Wav encoder addon for Kodi'
     'libcec: Pulse-Eight USB-CEC adapter support'
     'libnfs: NFS shares support'
     'libplist: AirPlay support'
