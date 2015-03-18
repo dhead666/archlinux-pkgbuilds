@@ -4,7 +4,7 @@
 # Original credits go toxantares
 
 pkgname=tinyxml2
-pkgver=2.2.0
+pkgver=3.0.0
 pkgrel=1
 pkgdesc='Simple, small, C++ XML parser that can be easily integrated into other programs'
 url="https://github.com/leethomason/$pkgname"
@@ -13,7 +13,7 @@ license=('zlib')
 depends=('gcc-libs')
 makedepends=('cmake')
 source=("$url/archive/$pkgver.tar.gz")
-md5sums=('3c7a9191c8f26e4f056a89902ac848b1')
+md5sums=('26584d2c1666aea5e664c105eb4e8153')
 
 _prefix='/usr'
 
