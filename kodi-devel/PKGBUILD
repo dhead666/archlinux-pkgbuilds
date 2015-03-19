@@ -157,8 +157,4 @@ package_kodi-eventclients-devel() {
   cd "$srcdir/$_pkgsrcname"
 
   make DESTDIR="$pkgdir" eventclients WII_EXTRA_OPTS=-DCWIID_OLD
-
-  install -dm755 "$pkgdir/usr/lib/python2.7/$pkgbase"
-  mv "$pkgdir/kodi"/* "$pkgdir/usr/lib/python2.7/$pkgbase"
-  rmdir "$pkgdir/kodi"
 }
