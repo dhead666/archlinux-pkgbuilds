@@ -55,6 +55,7 @@ prepare() {
   find -type f -name *.py -exec sed 's|^#!.*python$|#!/usr/bin/python2|' -i "{}" +
   sed 's|^#!.*python$|#!/usr/bin/python2|' -i tools/depends/native/rpl-native/rpl
   sed 's/python/python2/' -i tools/Linux/kodi.sh.in
+  sed 's/shell python/shell python2/' -i tools/EventClients/Makefile.in
   # texturepacker cannot build statically
   sed '/--enable-static/d' -i tools/depends/native/TexturePacker/Makefile
 
