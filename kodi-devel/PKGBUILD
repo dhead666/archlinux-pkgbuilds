@@ -10,13 +10,20 @@
 # Original credits go to Edgar Hucek <gimli at dark-green dot com>
 # for his xbmc-vdpau-vdr PKGBUILD at https://archvdr.svn.sourceforge.net/svnroot/archvdr/trunk/archvdr/xbmc-vdpau-vdr/PKGBUILD
 #
+# The PKGBUILD includes easy ways to:
+#   1) build from specific commit (without having to clone the whole repository)
+#   2) test new features by adding a list of Github's PR numbers
 
 pkgbase=kodi-devel
 pkgname=('kodi-devel' 'kodi-eventclients-devel')
 _gitname=xbmc
+
+# when building specific commit: 1) pkgver=commit_sha   2) _gitver=$pkgver
 pkgver=15.0a1
-_pkgvername=Isengard
-_pkgsrcname=$_gitname-$pkgver-$_pkgvername
+#_gitver=$pkgver
+_gitver=$pkgver-Isengard
+
+_pkgsrcname=$_gitname-$_gitver
 pkgrel=2
 arch=('i686' 'x86_64')
 url="http://xbmc.org"
@@ -32,7 +39,7 @@ makedepends=(
   'tinyxml' 'unzip' 'upower' 'xorg-xdpyinfo' 'yajl' 'zip'
 )
 
-source=("https://github.com/xbmc/xbmc/archive/$pkgver-$_pkgvername.tar.gz")
+source=("https://github.com/xbmc/xbmc/archive/$_gitver.tar.gz")
 sha256sums=('SKIP')
 
 _prefix='/usr'
