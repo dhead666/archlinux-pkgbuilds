@@ -60,6 +60,8 @@ prepare() {
 
   # disable wiiremote due to incompatibility with bluez-5.29
   sed '/WiiRemote/d' -i tools/EventClients/Makefile.in
+  sed '/mkdir -p $(DESTDIR)$(bindir)/i \
+install:' -i tools/EventClients/Makefile.in
 }
 
 build() {
