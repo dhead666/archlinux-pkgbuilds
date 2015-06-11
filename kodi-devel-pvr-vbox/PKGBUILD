@@ -3,17 +3,18 @@
 #
 # package version generated with # git log -1 --date=short --format="%cd.%h" | tr -d '-'
 
-pkgname=kodi-addon-pvr-vbox-devel
+pkgname=kodi-devel-pvr-vbox
 _gitname=pvr.vbox
-pkgver=20150320.010513e
-_gitver=010513e03a99ab44f2c4e89be0af7263d57f5393
+pkgver=20150422.4449aa5
+_gitver=4449aa556b0d439b531b7b7d823cf863cd0034bf
 pkgrel=1
-pkgdesc='VBox Gateway client addon for Kodi'
+pkgdesc='Box TV Gateway PVR client addon for Kodi'
 arch=('i686' 'x86_64')
 url="https://github.com/Jalle19/$_gitname"
 license=('GPL')
-makedepends=('cmake' 'kodi-platform-devel')
-depends=('kodi-devel>=15.0a2' 'tinyxml2')
+groups=('kodi-devel')
+makedepends=('cmake' 'kodi-devel-platform' 'kodi-devel-libplatform')
+depends=('kodi-devel' 'tinyxml2')
 source=("https://github.com/Jalle19/$_gitname/archive/$_gitver.tar.gz")
 md5sums=('SKIP')
 
