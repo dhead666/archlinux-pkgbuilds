@@ -19,7 +19,7 @@ md5sums=('SKIP')
 _prefix='/usr'
 
 build() {
-  cd "$srcdir/$_gitname-$_gitver"
+  cd "$srcdir/$_gitname-$pkgver"
   mkdir -p build && pushd build
   cmake \
     -DCMAKE_INSTALL_PREFIX=$_prefix \
@@ -32,6 +32,6 @@ build() {
 }
 
 package() {
-  cd "$srcdir/$_gitname-$_gitver/build"
+  cd "$srcdir/$_gitname-$pkgver/build"
   make DESTDIR="$pkgdir" install
 }
