@@ -41,7 +41,9 @@ makedepends=(
 )
 
 source=("https://github.com/xbmc/xbmc/archive/$_gitver.tar.gz" "0001-rsxs-gcc5-fix.patch")
-sha256sums=('944e2363fecfb5a7a652abd99054ea6e' '25bdeeae400fd1fcff4ad85139dd7524')
+sha256sums=(
+  '2075e80ea7193f69f5c87721c65b8439c4ed29389709d0ee6f5db52d0c3b33ad'
+  '96810302a15b215f4aea7854932a70ecd203bbe1730153cc6221ad20e69281bd')
 
 _prefix='/usr'
 
@@ -186,8 +188,8 @@ package_kodi-devel() {
 package_kodi-devel-eventclients() {
   pkgdesc="Kodi Event Clients"
   depends=('cwiid')
-  conflicts=('kodi-eventclients')
-  replaces=('kodi-eventclients-devel)
+  conflicts=('kodi-eventclients' 'kodi-eventclients-devel')
+  replaces=('kodi-eventclients-devel')
 
   cd "$srcdir/$_pkgsrcname"
 
