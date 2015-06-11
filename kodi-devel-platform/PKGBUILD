@@ -16,7 +16,7 @@ groups=('kodi-devel')
 makedepends=('cmake' 'kodi-devel-libplatform')
 depends=('kodi-devel' 'tinyxml')
 raplaces=('kodi-platform-devel')
-conflicts=('kodi-platform')
+conflicts=('kodi-platform' 'kodi-platform-devel')
 source=("https://github.com/xbmc/$_gitname/archive/$_gitver.tar.gz")
 md5sums=('SKIP')
 
