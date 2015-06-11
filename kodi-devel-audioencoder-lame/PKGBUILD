@@ -3,17 +3,19 @@
 #
 # package version generated with # git log -1 --date=short --format="%cd.%h" | tr -d '-'
 
-pkgname=kodi-audioencoder-lame-devel
+pkgname=kodi-devel-audioencoder-lame
 _gitname=audioencoder.lame
 pkgver=20150110.3eb59de
 _gitver=3eb59de951996659c143faaabacc5f34ee9a0b81
-pkgrel=1
+pkgrel=2
 pkgdesc='Lame MP3 encoder addon for Kodi'
 arch=('i686' 'x86_64')
 url="https://github.com/xbmc/$_gitname"
 license=('GPL')
+groups=('kodi-devel')
 makedepends=('cmake')
-depends=('kodi-devel')
+depends=('kodi-devel' 'lame')
+replaces=('kodi-audioencoder-lame-devel')
 source=("https://github.com/xbmc/$_gitname/archive/$_gitver.tar.gz")
 md5sums=('SKIP')
 
