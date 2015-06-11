@@ -3,17 +3,19 @@
 #
 # package version generated with # git log -1 --date=short --format="%cd.%h" | tr -d '-'
 
-pkgname=kodi-addon-pvr-hts-devel
+pkgname=kodi-devel-pvr-hts
 _gitname=pvr.hts
-pkgver=20150224.3bc77ae
-_gitver=3bc77ae4c4d261ce0210a6afff7404f7ac4ff106
+pkgver=20150330.4bf1a97
+_gitver=4bf1a97af1e5d9f748afda30d92914bc4b1f7621
 pkgrel=1
-pkgdesc='Tvheadend HTSP client addon for Kodi'
+pkgdesc='Tvheadend HTSP PVR client addon for Kodi'
 arch=('i686' 'x86_64')
 url="https://github.com/kodi-pvr/$_gitname"
 license=('GPL')
-makedepends=('cmake' 'kodi-platform-devel')
+groups=('kodi-devel')
+makedepends=('cmake' 'kodi-devel-platform' 'kodi-devel-libplatform')
 depends=('kodi-devel')
+replaces=('kodi-addon-pvr-hts-devel')
 source=("https://github.com/kodi-pvr/$_gitname/archive/$_gitver.tar.gz")
 md5sums=('SKIP')
 
