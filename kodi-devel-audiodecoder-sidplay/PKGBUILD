@@ -14,7 +14,7 @@ url="https://github.com/notspiff/$_gitname"
 license=('GPL')
 groups=('kodi-devel')
 makedepends=('cmake' 'kodi-devel-platform' 'kodi-devel-libplatform')
-depends=('kodi-devel' 'sidplay2-libs')
+depends=('kodi-devel' 'sidplay-libs')
 source=("https://github.com/notspiff/$_gitname/archive/$_gitver.tar.gz")
 md5sums=('SKIP')
 
@@ -30,6 +30,8 @@ build() {
   mkdir -p build && pushd build
   cmake \
     -DCMAKE_INSTALL_PREFIX=$_prefix \
+    -DCMAKE_INSTALL_LIBDIR="$_prefix/lib" \
+    -DCMAKE_INSTALL_LIBDIR_NOARCH="$_prefix/lib" \
     -DCMAKE_BUILD_TYPE=Release \
     ..
   make
