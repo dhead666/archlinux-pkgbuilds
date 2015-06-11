@@ -3,17 +3,19 @@
 #
 # package version generated with # git log -1 --date=short --format="%cd.%h" | tr -d '-'
 
-pkgname=kodi-platform-devel
+pkgname=kodi-devel-platform
 _gitname=kodi-platform
 pkgver=20150221.68315f0
-_gitver=68315f04d8a7c3bc4833af7bd56f5b7d905d351d
+_gitver=48bdd985b843353eec5804e4dbab2dc8f2b4b13e
 pkgrel=1
 pkgdesc='Kodi platform environment for compiling cmake binary addons'
 arch=('i686' 'x86_64')
 url="https://github.com/xbmc/$_gitname"
 license=('GPL')
-makedepends=('cmake')
+groups=('kodi-devel')
+makedepends=('cmake' 'kodi-devel-libplatform')
 depends=('kodi-devel' 'tinyxml')
+raplaces=('kodi-platform-devel')
 conflicts=('kodi-platform')
 source=("https://github.com/xbmc/$_gitname/archive/$_gitver.tar.gz")
 md5sums=('SKIP')
