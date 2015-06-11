@@ -1,7 +1,6 @@
 # Maintainer: dhead666 <myfoolishgames@gmail.com>
 # https://github.com/dhead666/archlinux-pkgbuilds
 #
-# package version generated with # git log -1 --date=short --format="%cd.%h" | tr -d '-'
 
 pkgname=sidplay-libs
 pkgver=2.1.1
@@ -37,7 +36,7 @@ prepare() {
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
-  ./configure --prefix=/usr
+  ./configure --prefix=$_prefix
   make
 }
 
