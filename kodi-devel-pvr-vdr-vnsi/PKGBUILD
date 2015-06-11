@@ -3,17 +3,19 @@
 #
 # package version generated with # git log -1 --date=short --format="%cd.%h" | tr -d '-'
 
-pkgname=kodi-addon-pvr-vdr-vnsi-devel
+pkgname=kodi-devel-pvr-vdr-vnsi
 _gitname=pvr.vdr.vnsi
-pkgver=20150301.3cc618e
-_gitver=3cc618e5948eff5c41591a1d5935ef0f60665deb
+pkgver=20150321.3a28e39
+_gitver=3a28e39a59eefbca8ad3ff932c8373eede954416
 pkgrel=1
-pkgdesc='VDR VNSI client addon for Kodi'
+pkgdesc='VDR VNSI PVR client addon for Kodi'
 arch=('i686' 'x86_64')
 url="https://github.com/kodi-pvr/$_gitname"
 license=('GPL')
-makedepends=('cmake' 'kodi-platform-devel')
+groups=('kodi-devel')
+makedepends=('cmake' 'kodi-devel-platform' 'kodi-devel-libplatform')
 depends=('kodi-devel')
+replaces=('kodi-addon-pvr-vdr-vnsi-devel')
 source=("https://github.com/kodi-pvr/$_gitname/archive/$_gitver.tar.gz")
 md5sums=('SKIP')
 
