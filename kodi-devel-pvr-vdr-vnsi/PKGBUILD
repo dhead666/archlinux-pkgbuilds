@@ -22,17 +22,15 @@ md5sums=('SKIP')
 
 _prefix='/usr'
 
-prepare() {
-  msg "Starting make..."
-  cd "$srcdir/$_gitname-$_gitver"
-  sed 's/libXBMC_codec.h/kodi\/libXBMC_codec.h/' -i src/xbmc_codec_descriptor.hpp
-}
-
 build() {
+  msg "Starting make..."
+  
   cd "$srcdir/$_gitname-$_gitver"
   mkdir -p build && pushd build
   cmake \
     -DCMAKE_INSTALL_PREFIX=$_prefix \
+    -DCMAKE_INSTALL_LIBDIR="$_prefix/lib" \
+    -DCMAKE_INSTALL_LIBDIR_NOARCH="$_prefix/lib" \
     -DCMAKE_BUILD_TYPE=Release \
     ..
   make
