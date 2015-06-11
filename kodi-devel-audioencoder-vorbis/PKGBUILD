@@ -3,17 +3,19 @@
 #
 # package version generated with # git log -1 --date=short --format="%cd.%h" | tr -d '-'
 
-pkgname=kodi-audioencoder-vorbis-devel
+pkgname=kodi-devel-audioencoder-vorbis
 _gitname=audioencoder.vorbis
 pkgver=20150227.d556a68
 _gitver=d556a6872e59806526f208e8d0af5f886a6c67bb
-pkgrel=1
+pkgrel=2
 pkgdesc='Vorbis encoder addon for Kodi'
 arch=('i686' 'x86_64')
 url="https://github.com/xbmc/$_gitname"
 license=('GPL')
+groups=('kodi-devel')
 makedepends=('cmake')
-depends=('kodi-devel')
+depends=('kodi-devel' 'libvorbis' 'libogg')
+replaces=('kodi-audioencoder-vorbis-devel')
 source=("https://github.com/xbmc/$_gitname/archive/$_gitver.tar.gz")
 md5sums=('SKIP')
 
