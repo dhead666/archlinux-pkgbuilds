@@ -126,7 +126,6 @@ package_kodi-devel() {
     'bluez: Blutooth support'
     'kodi-devel-audiodecoder-modplug: Modplug decoder addon for Kodi'
     'kodi-devel-audiodecoder-nosefart: Nosefart decoder addon for Kodi'
-    'kodi-devel-audiodecoder-sidplay: Sidplay decoder addon for Kodi'
     'kodi-devel-audiodecoder-snesapu: SPC decoder addon for Kodi'
     'kodi-devel-audiodecoder-stsound: YM decoder addon for Kodi'
     'kodi-devel-audiodecoder-timidity: Timidity decoder addon for Kodi'
