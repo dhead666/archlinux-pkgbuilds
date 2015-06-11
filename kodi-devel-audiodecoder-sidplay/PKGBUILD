@@ -33,6 +33,12 @@ build() {
     -DCMAKE_INSTALL_LIBDIR="$_prefix/lib" \
     -DCMAKE_INSTALL_LIBDIR_NOARCH="$_prefix/lib" \
     -DCMAKE_BUILD_TYPE=Release \
+    -DBUILD_SHARED_LIBS=1 \
+    -DUSE_LTO=1  \
+    -DSIDPLAY2_LIBRARIES="/usr/lib/libsidplay2.so" \
+    -DSIDPLAY2_INCLUDE_DIRS="$_prefix/include/sidplay" \
+    -DCMAKE_INCLUDE_PATH="$_prefix/include" \
+    -DCMAKE_LIBRARY_PATH="$_prefix/lib" \
     ..
   make
   popd
