@@ -5,7 +5,7 @@
 pkgname=sidplay-libs
 pkgver=2.1.1
 pkgrel=1
-pkgdesc='Platform support library used by libCEC and binary add-ons for Kodi'
+pkgdesc='The new generation of SID emulation'
 arch=('i686' 'x86_64')
 url="http://sidplay2.sourceforge.net"
 license=('GPL')
