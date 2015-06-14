@@ -5,8 +5,8 @@
 
 pkgname=kodi-devel-pvr-argustv
 _gitname=pvr.argustv
-pkgver=20150409.96ee875
-_gitver=96ee87503ebdaadc3cdf66707fb1f263f96dc683
+pkgver=20150516.cffc8b6
+_gitver=cffc8b6bee2778e9da76b798d25685bc5e9b9fe0
 _jsoncpp_ver=0.5.0
 pkgrel=1
 pkgdesc='ARGUS TV PVR addon for Kodi'

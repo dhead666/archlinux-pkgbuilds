@@ -5,8 +5,8 @@
 
 pkgname=kodi-devel-pvr-filmon
 _gitname=pvr.filmon
-pkgver=20150331.413fe9e
-_gitver=413fe9eca6f4a202e678e2dcc7dbf59f19e35164
+pkgver=20150522.8c02f43
+_gitver=8c02f43d3880b0c24c303f787ff1cf72d5164dae
 _jsoncpp_ver=0.5.0
 pkgrel=1
 pkgdesc='Filmon PVR addon for Kodi'

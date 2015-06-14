@@ -5,8 +5,8 @@
 
 pkgname=kodi-devel-audiodecoder-sidplay
 _gitname=audiodecoder.sidplay
-pkgver=20150314.f2e7d98
-_gitver=f2e7d98528dfb3bfdd5dabcb5152955c9dc6979a
+pkgver=20150602.27b2c05
+_gitver=27b2c0582878857bfe03195471fa7ffa4bcc40f0
 pkgrel=1
 pkgdesc='Sidplay decoder addon for Kodi'
 arch=('i686' 'x86_64')
@@ -34,7 +34,6 @@ build() {
     -DCMAKE_INSTALL_LIBDIR_NOARCH="$_prefix/lib" \
     -DCMAKE_BUILD_TYPE=Release \
     -DBUILD_SHARED_LIBS=1 \
-    -DUSE_LTO=1  \
     -DSIDPLAY2_LIBRARIES="/usr/lib/libsidplay2.so" \
     -DSIDPLAY2_INCLUDE_DIRS="$_prefix/include/sidplay" \
     -DCMAKE_INCLUDE_PATH="$_prefix/include" \
