@@ -14,7 +14,7 @@ url="https://github.com/Jalle19/$_gitname"
 license=('GPL')
 groups=('kodi-devel')
 makedepends=('cmake' 'kodi-devel-platform' 'kodi-devel-libplatform')
-depends=('kodi-devel' 'tinyxml2')
+depends=('kodi-devel')
 source=("https://github.com/Jalle19/$_gitname/archive/$_gitver.tar.gz")
 md5sums=('SKIP')
 
