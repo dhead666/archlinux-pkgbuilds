@@ -3,7 +3,7 @@
  
 pkgname=logisim-evolution
 _truepkgname=logisim
-pkgver=2.13.5
+pkgver=2.13.9
 pkgrel=3
 provides=('logisim')
 conflicts=('logisim')
@@ -13,11 +13,11 @@ url="https://github.com/reds-heig/logisim-evolution"
 license=('GPL2')
 depends=('java-runtime' 'gtk-update-icon-cache' 'desktop-file-utils' 'shared-mime-info')
 install=logisim.install
-source=(https://reds.heig-vd.ch/share/logisim-evolution/logisim-evolution-2.13.5.jar
+source=(https://reds.heig-vd.ch/share/logisim-evolution/logisim-evolution-$pkgver.jar
         ${_truepkgname}.xml
         ${_truepkgname}.desktop
         ${_truepkgname}.sh)
-sha256sums=('d02ba7051e79f9b603431faa358fcc40815abba01dcb3651820e2f55560c6e91'
+sha256sums=('47b21536a030aab1ab7d039d802aab26efaf8c2b47da3759d33b5fd820336b93'
             '9dd50eb99edeff5f74247ae9b050d56c1366818ea80fbdcc6c5e24bfabfec5c0'
             '4d5ae9f9d5f5789469f3580a81ee568ca426f324df3ba37d7e4c8d6b20dc638c'
             '56eaac407f6ae64289ab228269edb8b1a2bbe647e2baf5dfab7f481c9db8e680')
