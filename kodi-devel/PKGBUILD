@@ -123,6 +123,8 @@ package_kodi-devel() {
     'gdb: for meaningful backtraces in case of trouble - STRONGLY RECOMMENDED'
     'afpfs-ng: Apple shares support'
     'bluez: Blutooth support'
+    'kodi-devel-adsp-basic: Basic ADSP Processor addon for Kodi'
+    'kodi-devel-adsp-freesurround: FreeSurround ADSP addon for Kodi'
     'kodi-devel-audiodecoder-modplug: Modplug decoder addon for Kodi'
     'kodi-devel-audiodecoder-nosefart: Nosefart decoder addon for Kodi'
     'kodi-devel-audiodecoder-snesapu: SPC decoder addon for Kodi'
