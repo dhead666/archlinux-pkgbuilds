@@ -10,6 +10,7 @@ pkgdesc="Pulse-Eight's libcec for the Pulse-Eight USB-CEC adapter"
 arch=('i686' 'x86_64')
 url="http://libcec.pulse-eight.com/"
 license=('GPL')
+groups=('kodi-devel')
 makedepends=('cmake')
 depends=('udev' 'lockdev' 'kodi-devel-libplatform' 'libxrandr')
 conflicts=('libcec')
