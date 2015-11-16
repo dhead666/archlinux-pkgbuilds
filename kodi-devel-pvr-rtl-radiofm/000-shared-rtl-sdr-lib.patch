@@ -1,0 +1,33 @@
+--- pvr.rtl.radiofm-master/CMakeLists.txt	2015-09-10 02:13:21.000000000 +0300
++++ pvr.rtl.radiofm-master-new/CMakeLists.txt	2015-11-16 16:37:20.937679334 +0200
+@@ -2,7 +2,7 @@
+ 
+ cmake_minimum_required(VERSION 2.6)
+ 
+-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR} ${CMAKE_SOURCE_DIR}/lib/rtl-sdr/cmake/Modules)
++set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR})
+ 
+ enable_language(CXX)
+ 
+@@ -18,10 +18,8 @@
+ include_directories(${kodiplatform_INCLUDE_DIRS}
+                     ${platform_INCLUDE_DIRS}
+                     ${KODI_INCLUDE_DIR}
+-                    ${TINYXML_INCLUDE_DIRS}
+-                    ${PROJECT_SOURCE_DIR}/lib/rtl-sdr/include)
++                    ${TINYXML_INCLUDE_DIRS})
+ 
+-add_subdirectory(lib/rtl-sdr)
+ 
+ set(BASIC_SOURCES src/client.cpp
+                   src/RadioReceiver.cpp
+@@ -37,8 +35,7 @@
+ 
+ set(DEPLIBS ${kodiplatform_LIBRARIES}
+             ${platform_LIBRARIES}
+-            ${TINYXML_LIBRARIES}
+-            rtlsdr_static)
++            ${TINYXML_LIBRARIES})
+ 
+ build_addon(pvr.rtl.radiofm BASIC DEPLIBS)
+ 

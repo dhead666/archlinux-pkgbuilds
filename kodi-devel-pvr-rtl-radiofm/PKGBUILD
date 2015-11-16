@@ -1,0 +1,43 @@
+# Maintainer: dhead666 <myfoolishgames@gmail.com>
+# https://github.com/dhead666/archlinux-pkgbuilds
+#
+# package version generated with # git log -1 --date=short --format="%cd.%h" | tr -d '-'
+
+pkgname=kodi-devel-pvr-rtl-radiofm
+_gitname=pvr.rtl.radiofm
+pkgver=20150910.0da7033
+_gitver=0da7033565a0b324e08fceb74b36967c9401b11e
+pkgrel=1
+pkgdesc='FM Radio receiver based upon RTL-SDR as PVR addon for Kodi'
+arch=('i686' 'x86_64')
+url="https://github.com/AlwinEsch/$_gitname"
+license=('GPL')
+groups=('kodi-devel')
+makedepends=('cmake' 'kodi-devel-platform' 'kodi-devel-libplatform')
+depends=('kodi-devel' 'tinyxml' 'rtl-sdr')
+source=("https://github.com/AlwinEsch/$_gitname/archive/$_gitver.tar.gz"
+        '000-shared-rtl-sdr-lib.patch')
+md5sums=('SKIP' 'SKIP')
+
+_prefix='/usr'
+
+build() {
+  msg "Starting make..."
+  
+  cd "$srcdir/$_gitname-$_gitver"
+  patch -p1 -i "$srcdir/000-shared-rtl-sdr-lib.patch"
+  mkdir -p build && pushd build
+  cmake \
+    -DCMAKE_INSTALL_PREFIX=$_prefix \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DBUILD_SHARED_LIBS=1 \
+    -DUSE_LTO=1 \
+    ..
+  make
+  popd
+}
+
+package() {
+  cd "$srcdir/$_gitname-$_gitver/build"
+  make DESTDIR="$pkgdir" install
+}
