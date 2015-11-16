@@ -111,8 +111,8 @@ package_kodi-devel() {
   conflicts=('xbmc' 'xbmc-pulse' 'xbmc-svn' 'xbmc-git-xvba' 'xbmc-git' 'kodi' 'kodi-git')
 
   depends=(
-    'bluez-libs' 'curl' 'glew' 'hicolor-icon-theme' 'lame' 'libaacs'
-    'libass' 'libbluray' 'libcdio' 'libmariadbclient' 'libmicrohttpd' 'libmodplug'
+    'bluez-libs' 'libcrossguid-git' 'curl' 'dcadec-git' 'glew' 'hicolor-icon-theme' 'lame'
+    'libaacs' 'libass' 'libbluray' 'libcdio' 'libmariadbclient' 'libmicrohttpd' 'libmodplug'
     'libmpeg2' 'libpulse' 'libsamplerate' 'libssh' 'libva' 'libvdpau' 'libvorbis'
     'libxrandr' 'libxslt' 'lzo' 'mesa' 'python2-pillow' 'python2-simplejson'
     'rtmpdump' 'sdl2' 'smbclient' 'taglib' 'tinyxml' 'xorg-xdpyinfo' 'yajl'
