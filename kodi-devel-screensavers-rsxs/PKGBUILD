@@ -14,9 +14,15 @@ url="https://github.com/notspiff/$_gitname"
 license=('GPL')
 groups=('kodi-devel')
 makedepends=('cmake')
-depends=('kodi-devel')
-source=("https://github.com/notspiff/$_gitname/archive/$_gitver.tar.gz")
-md5sums=('SKIP')
+depends=('kodi-devel' 'libpng')
+source=(
+  "https://github.com/notspiff/$_gitname/archive/$_gitver.tar.gz"
+  '0001-fix-gcc5-compile.patch'
+  '0002-fix-default-include-dir.patch')
+md5sums=(
+  'SKIP'
+  '3c0fc8c71c9ed7c76d4809a76b654283'
+  'f32a6f97865027503a002f4dc72045b6')
 
 _prefix='/usr'
 
@@ -24,6 +30,8 @@ build() {
   msg "Starting make..."
 
   cd "$srcdir/$_gitname-$_gitver"
+  patch -p1 -i "$srcdir/0001-fix-gcc5-compile.patch"
+  patch -p1 -i "$srcdir/0002-fix-default-include-dir.patch"
   mkdir -p build && pushd build
   cmake \
     -DCMAKE_INSTALL_PREFIX=$_prefix \
