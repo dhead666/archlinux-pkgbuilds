@@ -22,7 +22,7 @@ _prefix='/usr'
 
 build() {
   cd "$srcdir/$_gitname-$_gitver"
-  mkdir -p build && pushd build
+  mkdir build && cd build
   cmake \
     -DCMAKE_INSTALL_PREFIX=$_prefix \
     -DCMAKE_BUILD_TYPE=Release \
@@ -33,7 +33,6 @@ build() {
     -DCMAKE_LIBRARY_PATH="$_prefix/lib" \
     ..
   make
-  popd
 }
 
 package() {
