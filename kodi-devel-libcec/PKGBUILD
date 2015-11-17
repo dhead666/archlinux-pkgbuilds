@@ -20,8 +20,7 @@ sha256sums=('SKIP')
 
 build() {
     cd "$_gitname"
-    mkdir build
-    cd build
+    mkdir build && cd build
     cmake .. \
         -DCMAKE_BUILD_TYPE=Release \
         -DBUILD_SHARED_LIBS=1 \
