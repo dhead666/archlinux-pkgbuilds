@@ -36,6 +36,7 @@ prepare() {
   cmake \
     -DCMAKE_INSTALL_PREFIX=$_prefix \
     -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_POSITION_INDEPENDENT_CODE=on \
     ..
   make
   mkdir ../out
@@ -50,7 +51,7 @@ build() {
   cmake \
     -DCMAKE_INSTALL_PREFIX=$_prefix \
     -DJSONCPP_INCLUDE_DIRS="$srcdir/jsoncpp-svn-release-$_jsoncpp_ver/out/usr/include/jsoncpp" \
-    -DJSONCPP_LIBRARIES="$srcdir/jsoncpp-svn-release-$_jsoncpp_ver/out/usr/lib" \
+    -DJSONCPP_LIBRARIES="$srcdir/jsoncpp-svn-release-$_jsoncpp_ver/out/usr/lib/libjsoncpp.a" \
     -DCMAKE_BUILD_TYPE=Release \
     ..
   make
