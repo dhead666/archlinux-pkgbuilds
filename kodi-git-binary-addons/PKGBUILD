@@ -1,0 +1,49 @@
+# Maintainer: dhead666 <myfoolishgames@gmail.com>
+# https://github.com/dhead666/archlinux-pkgbuilds
+#
+# WARNING: low quality packaging
+
+pkgname=kodi-git-binary-addons
+_gitname=xbmc
+pkgver=20151122.fbccdc4
+pkgrel=1
+pkgdesc='Binary addons for Kodi'
+arch=('i686' 'x86_64')
+url="https://github.com/xbmc/repo-binary-addons"
+license=('GPL')
+groups=('kodi-git')
+makedepends=('cmake')
+depends=(
+    'asplib' 'flac' 'glew' 'jsoncpp' 'lame' 'libmodplug' 'libogg' 'libpng' 'libvorbis'
+    'projectm' 'soil' 'tinyxml' 'tinyxml2' 'vsxu' 'zlib'
+  )
+#conflicts=('')
+#replaces=('')
+source=("$_gitname::git://github.com/xbmc/xbmc.git")
+sha256sums=('SKIP')
+
+
+pkgver() {
+  cd "$srcdir/$_gitname"
+  git log -1 --date=short --format="%cd.%h" | tr -d '-'
+}
+
+prepare() {
+  cd "$srcdir/$_gitname"
+  mkdir build
+
+  find -type f -name *.py -exec sed 's|^#!.*python$|#!/usr/bin/python2|' -i "{}" +
+  sed 's|^#!.*python$|#!/usr/bin/python2|' -i tools/depends/native/rpl-native/rpl
+}
+
+
+build() {
+  cd "$srcdir/$_gitname"
+
+  make -C tools/depends/target/binary-addons PREFIX="$srcdir/$_gitname/build/usr"
+}
+
+package() {
+  cd "$srcdir/$_gitname/build"
+  mv usr "$pkgdir/usr"
+}
