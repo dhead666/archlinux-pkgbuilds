@@ -15,7 +15,7 @@ url="https://github.com/kodi-pvr/$_gitname"
 license=('GPL')
 groups=('kodi-devel')
 makedepends=('cmake' 'kodi-devel-platform' 'kodi-devel-libplatform')
-depends=('kodi-devel' 'jsoncpp')
+depends=('kodi-devel')
 source=(
   "https://github.com/kodi-pvr/$_gitname/archive/$_gitver.tar.gz"
   "https://github.com/open-source-parsers/jsoncpp/archive/svn-release-$_jsoncpp_ver.tar.gz"
