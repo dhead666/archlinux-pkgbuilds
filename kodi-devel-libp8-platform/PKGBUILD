@@ -1,0 +1,42 @@
+# Maintainer: dhead666 <myfoolishgames@gmail.com>
+# https://github.com/dhead666/archlinux-pkgbuilds
+#
+# package version generated with # git log -1 --date=short --format="%cd.%h" | tr -d '-'
+
+## Replacing kodi-devel-libplatform from kodi>=17.0a1
+
+pkgname=kodi-devel-libp8-platform
+_gitname=platform
+pkgver=20150805.081032f
+_gitver=38343e0acd6a636ac46139aa666aee4a8d1f13db
+pkgrel=1
+pkgdesc='Platform support library used by libCEC and binary add-ons for Kodi'
+arch=('i686' 'x86_64')
+url="https://github.com/Pulse-Eight/$_gitname"
+license=('GPL')
+groups=('kodi-devel')
+makedepends=('cmake')
+provides=('libplatform' 'kodi-devel-libplatform')
+conflicts=('libplatform' 'kodi-devel-libplatform')
+source=("https://github.com/Pulse-Eight/$_gitname/archive/$_gitver.tar.gz")
+md5sums=('SKIP')
+
+_prefix='/usr'
+
+build() {
+  cd "$srcdir/$_gitname-$_gitver"
+  mkdir build && cd build
+  cmake \
+    -DCMAKE_INSTALL_PREFIX=$_prefix \
+    -DCMAKE_INSTALL_LIBDIR="$_prefix/lib" \
+    -DCMAKE_INSTALL_LIBDIR_NOARCH="$_prefix/lib" \
+    -DBUILD_SHARED_LIBS=1 \
+    -DCMAKE_BUILD_TYPE=Release \
+    ..
+  make
+}
+
+package() {
+  cd "$srcdir/$_gitname-$_gitver/build"
+  make DESTDIR="$pkgdir" install
+}
